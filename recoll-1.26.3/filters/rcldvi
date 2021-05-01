@@ -1,0 +1,164 @@
+#!/bin/sh
+# @(#$Id: rcldvi,v 1.7 2008-10-08 16:15:22 dockes Exp $  (C) 2006 J.F.Dockes
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the
+# Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+#
+# Extract text from a dvi file by either executing dvitops and
+# pstotext or using catdvi.
+#
+# pstotext does not work any more with gs 9.22-25, so catdvi is always
+# needed now.
+#    Initially dvitops had given better results during tests, and was
+#    chosen first if available, but the dvitops/pstotext combination
+#    is much slower than catdvi set variables. In any case, the
+#    program is not too good with special characters (e.g. ligatures)
+
+LANG=C ; export LANG
+LC_ALL=C ; export LC_ALL
+progname="rcldvi"
+filetype=dvi
+
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+decoderdvips()
+{
+    dvips -f $1 2> /dev/null | pstotext | iconv -f cp1252 -t utf-8 -c -s
+}
+decodercatdvi()
+{
+    catdvi --output-encoding=UTF-8 $1
+}
+decoder=""
+
+# pstotext does not work any more
+# iscmd dvips
+# isdvips=$?
+# iscmd pstotext
+# ispstotext=$?
+# if test $isdvips -eq 0 -a $ispstotext -eq 0; then
+#   decoder=decoderdvips
+# elif iscmd catdvi ; then
+#   decoder=decodercatdvi
+# fi
+
+if iscmd catdvi ; then
+    decoder=decodercatdvi
+fi
+ 
+if test X$decoder = X ; then
+   senderror HELPERNOTFOUND catdvi
+fi
+
+# The strange 'BEGIN' setup is to prevent 'file' from thinking this file
+# is an awk program
+$decoder "$infile" |
+awk 'BEGIN'\
+' {
+  printf("<html><head><title></title>\n")
+  printf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n")
+  printf("</head>\n<body><p>");
+  cont = ""
+}
+{
+    $0 = cont $0
+    cont = ""
+
+    if ($0 == "\f") {
+       print "</p>\n<hr>\n\f<p>"
+       next
+    } else if ($0 ~ /-$/) {
+      match($0, "[ \t][^ \t]+$")
+      line = substr($0, 0, RSTART)
+      cont = substr($0, RSTART, RLENGTH)
+      $0 = line
+      gsub("-", "", cont)
+    }
+
+    gsub(/&/, "\\&amp;", $0)
+    gsub(/</, "\\&lt;", $0)
+    gsub(/>/, "\\&gt;", $0)
+
+    print $0 "<br>"
+}
+END {
+    print "</p></body></html>"
+}'

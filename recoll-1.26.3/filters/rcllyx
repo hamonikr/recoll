@@ -1,0 +1,243 @@
+#!/bin/sh
+# @(#$Id: rcllyx,v 1.6 2007-06-08 13:51:09 dockes Exp $  (C) 2004 J.F.Dockes
+# There may still be code from Estraier in here:
+#================================================================
+# Estraier: a personal full-text search system
+# Copyright (C) 2003-2004 Mikio Hirabayashi
+#================================================================
+#================================================================
+# Convert a lyx file to recoll HTML.
+#
+# We use lyx --export. It was suggested to use untex, but it doesn't give 
+# good results on raw lyx (of course, this is not TeX), and exporting to
+# LaTex then using untex doesn't look nice when we can use the native  lyx
+# text export.
+# The character encoding of the exported text is defined by the
+# \inputencoding directive in the lyx file header and, in quite an obscure
+# way, by the \language parameter. We use a heuristic to divine the output
+# text encoding and it is guaranteed not to work in all cases. Trials using
+# an intermediary dvi, pdf or ps file gave worse results. This needs
+# improvement. It doesn't even take into account the fact that the language
+# can change inside the doc (does this change the encoding or not ?). To be
+# frank, this is not entirely my fault, the lyx format is a joke.
+#
+# As there is unfortunately no way to define the output file name, we have
+# to use a temporary directory and link the input file in there.
+
+# set variables
+#LANG=C ; export LANG
+#LC_ALL=C ; export LC_ALL
+progname="rcllyx"
+filetype=lyx
+
+
+
+
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+checkcmds lyx iconv
+
+# We need a temporary directory
+if test z"$RECOLL_TMPDIR" != z; then
+   ttdir=$RECOLL_TMPDIR
+elif test z"$TMPDIR" != z ; then
+   ttdir=$TMPDIR
+else
+   ttdir=/tmp
+fi
+
+tmpdir=$ttdir/rcllyx_tmp$$
+mkdir $tmpdir || exit 1
+mkdir $tmpdir/rcllyxtmp || exit 1
+
+cleanup()
+{
+    # Note that we're using a constant part (rcllyxtmp), that hopefully
+    # guarantees that we can't do big mistakes here.
+    rm -rf $tmpdir/rcllyxtmp
+    rmdir $tmpdir
+}
+    
+trap cleanup EXIT HUP QUIT INT TERM
+
+workdir=$tmpdir/rcllyxtmp
+case "$infile" in
+ */*) ;;
+ *) infile=`pwd`/"$infile";;
+esac
+
+ln -s "$infile" "$workdir/input.lyx" || exit 1
+lyxfile=$workdir/input.lyx
+textfile=$workdir/input.txt
+
+#echo lyxfile: $lyxfile ; ls -l $lyxfile; echo textfile: $textfile
+
+# Run lyx --export
+lyx --export text "$lyxfile" || senderror "lyx --export text "$lyxfile" failed"
+
+# Need the lyx version. After some point -export prints utf-8,
+# whatever the input version
+LYXOUTPUTUTF=No
+vline=`lyx --version 2>&1 | head -1 | tr '.' ' '`
+set $vline
+for i in $2 $3 $4;do
+    expr "$i" ':' '[0-9][0-9]*' > /dev/null || \
+        senderror "Bad lyx version string $vline"
+done
+maj=`expr $2 '*' 10000`
+med=`expr $3 '*' 100` 
+min=`expr $4 '*' 1` 
+version=`expr $maj + $med + $min` || senderror "Bad lyx version string $vline"
+
+if test $version -ge 10607 ; then
+  LYXOUTPUTUTF=Yes
+fi
+if test X$LYXOUTPUTUTF = XNo ; then
+echo "OLD VERSION"
+  # Charset and language
+  formatline=`egrep '^\\\lyxformat ' "$lyxfile"`
+  if test -n "$formatline" ; then 
+     set $formatline
+     format=$2
+  fi
+  charsetline=`egrep '^\\\inputencoding ' "$lyxfile"`
+  if test -n "$charsetline" ; then 
+     set $charsetline
+     charset=$2
+  fi
+  langline=`egrep '^\\\language ' "$lyxfile"`
+  if test -n "$langline" ; then 
+     set $langline
+     lang=$2
+  fi
+  #echo format: [$format] charset: [$charset] lang [$lang]
+  
+  if test "$format" -ge 249 ; then
+    charset=utf-8
+  else
+    # try to guess the charset from the language: this is in no way guaranteed
+    # to work, the logic has built-in inconsistencies even beyond the numerous
+    # external ones (what if the ukrainian writer prefers koi8-r ?). This is a
+    # joke. 
+  if test -z "$charset" -o "$charset" = default -o "$charset" = auto ; then
+    case "$lang" in
+      american|afrikaans|basque|catalan|danish|dutch|english|faeroese|finnish|french|galician|german|icelandic|irish|italian|norwegian|portuguese|spanish|swedish)
+        charset=iso-8859-1;;
+      czech|german|hungarian|polish|romanian|croatian|slovak|slovene)
+        charset=iso-8859-2;;
+      esperanto|galician|maltese|Turkish) 
+        charset=iso-8859-3;;
+      estonian|latvian|lithuanian) 
+        charset=iso-8859-4;;
+      bulgarian|byelorussian|macedonian|russian|serbian|ukrainian) 
+        charset=iso-8859-5;;
+      arabic) 
+        charset=iso-8859-6;;
+      greek) 
+        charset=iso-8859-7;;
+      hebrew) 
+        charset=iso-8859-8;;
+      #ISO-8859-9 - Latin 5 Same as 8859-1 except for Turkish instead of
+      #Icelandic. ? What is one to do :)
+      #ISO-8859-10 - Latin 6
+      lappish|nordic|eskimo|inuit|sami)
+        charset=iso-8859-10;;
+    albanian|german|english|basque|breton|catalan|danish|spanish|estonian|esthonian|faeroese|faroese|finnish|french|frisian|friesian|scottish|goidelic|irish|gaelic|galician|welsh|greenlandic|inuit|icelandic|italian|latin|dutch|norvegian|portuguese|romansch|romansh|friulian|ladin|swedish)
+        charset=iso-8859-15;;
+      *)
+        charset=iso-8859-1;;
+      esac
+    fi
+  fi
+# End Old lyx needing output tweaking
+fi
+
+if test -n "$charset" ; then
+   inputcmd="iconv -f $charset -t UTF-8 -c -s"
+else
+   inputcmd=cat
+fi
+#echo inputcmd: [$inputcmd]
+
+cat <<EOF
+<html>
+<head>
+    <title>$title</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
+<body>
+<pre>
+EOF
+
+$inputcmd < "$textfile"
+
+cat <<EOF
+</pre>
+</body>
+</html>
+EOF

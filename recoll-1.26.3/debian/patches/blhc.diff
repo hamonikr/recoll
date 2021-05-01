@@ -1,0 +1,18 @@
+Description: Fix CPP/CXX flags for blhc
+Author: Kartik Mistry <kartik@debian.org>, Jean-Francois Dockes <jf@dockes.org>
+diff --git a/qtgui/recoll.pro.in b/qtgui/recoll.pro.in
+--- a/qtgui/recoll.pro.in
++++ b/qtgui/recoll.pro.in
+@@ -10,7 +10,11 @@ DEFINES += BUILDING_RECOLL
+ @QMAKE_ENABLE_WEBENGINE@ QT += webengine
+ @QMAKE_ENABLE_WEBENGINE@ DEFINES += USING_WEBENGINE
+ 
++QMAKE_CPPFLAGS *= $(shell dpkg-buildflags --get CPPFLAGS)
++QMAKE_CFLAGS   *= $(shell dpkg-buildflags --get CFLAGS)
+-QMAKE_CXXFLAGS += -std=c++11
++QMAKE_CXXFLAGS += -std=c++11 -D_FORTIFY_SOURCE=2
++QMAKE_CXXFLAGS *= $(shell dpkg-buildflags --get CXXFLAGS)
++QMAKE_LFLAGS   *= $(shell dpkg-buildflags --get LDFLAGS)
+ 
+ @QMAKE_ENABLE_ZEITGEIST@ QT += dbus
+ @QMAKE_ENABLE_ZEITGEIST@ QMAKE_CXXFLAGS += -DUSE_ZEITGEIST

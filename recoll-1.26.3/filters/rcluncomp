@@ -1,0 +1,46 @@
+#!/bin/sh
+# @(#$Id: rcluncomp,v 1.3 2007-10-27 08:40:25 dockes Exp $  (C) 2004 J.F.Dockes
+
+# Uncompress file using any program like gunzip/bunzip2. We jump through
+# hoops to let the decompressor remove the compression suffix in the file
+# name. The input directory must be empty on entry.
+
+if test $# != 3 -o ! -f "$2" -o ! -d "$3" ; then 
+   echo "Usage: rcluncomp <ucomp_prog> <infile> <outdir>"
+   exit 1
+fi
+
+uncomp=$1
+infile=$2
+outdir=$3
+
+sinfile=`basename "$infile"`
+#echo "rcluncomp: $sinfile" 1>&2
+
+case "$sinfile" in
+
+  # File with a suffix: try to decompress in file mode so that the
+  # decompressor can transform the file name if it knows how. Try
+  # filter mode if this fails
+  *.*)
+    cp "$infile" "$outdir/$sinfile" || exit 1
+    # try uncompress
+    if $uncomp "$outdir/$sinfile" ; then
+       uncompressed=`echo $outdir/*`
+    else
+       rm -f "$outdir/sinfile"
+       $uncomp < "$infile" > "$outdir/$sinfile" || exit 1
+       uncompressed="$outdir/$sinfile"
+    fi
+    ;;
+
+  # Suffixless file names: use filter mode
+  *)
+	$uncomp < "$infile" > "$outdir/$sinfile" || exit 1
+	uncompressed="$outdir/$sinfile"
+	;;
+esac
+
+cat <<EOF
+$uncompressed
+EOF

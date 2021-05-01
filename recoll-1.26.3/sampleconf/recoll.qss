@@ -1,0 +1,57 @@
+/* Copyright (C) 2004 J.F.Dockes
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+/* 
+   This is an embryonic example Qt style sheet for Recoll. It is not really
+   supposed to be less ugly than the default look, it's just provided in
+   hope that someone with better taste will want to step in, or you can use
+   it to indulge your preference for bright red backgrounds...
+
+   If you do want to use it, and encounter a difficulty due to (lack of)
+   widget object names or whatever, please get in touch, I'll fix what
+   needs to be.
+
+   Please check http://developer.qt.nokia.com/doc/qt-4.8/stylesheet.html 
+   for Qt style sheet information.
+*/
+
+
+/* Use a light grey background by default (lighter than the usual qt
+   default):
+*/
+
+* {
+    background: #eeeeee;
+}
+
+/* Use a light yellow background for all text display areas: */
+
+QComboBox[editable="true"], QTextEdit, QLineEdit, QTextBrowser, QTableView,
+QWebView, QPlainTextEdit { 
+    background: #ffffee;
+    color: black;
+}
+
+/* Keep a white background for the QTextEdit inside the Preview window 
+   This is rather arbitrary, just to show how to do it:
+*/
+Preview QTextEdit { 
+    background: white;
+    color: black;
+    font-family: Serif;
+    font-size: 12pt;
+}

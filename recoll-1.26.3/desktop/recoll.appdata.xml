@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Jean-Francois Dockes <jfd@recoll.org> -->
+<application>
+ <id type="desktop">recoll.desktop</id>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-2.0+</project_license>
+ <name>Recoll</name>
+ <summary>Find documents by specifying search terms</summary>
+ <description>
+ <p>Recoll finds keywords inside documents text as well as file names.</p>
+ <ul>
+   <li>It can search most document formats.</li>
+   <li>It can reach any storage place: files, archive members, email
+   attachments, transparently handling decompression.</li>
+   <li>One click will open the document inside a native editor or
+   display an even quicker text preview.</li>
+ </ul>
+ </description>
+ <screenshots>
+  <screenshot type="default">http://www.recoll.org/files/recoll-mainwin-h-1248x702.png</screenshot>
+ </screenshots>
+ <url type="homepage">http://www.recoll.org/</url>
+ <updatecontact>contact@recoll.org</updatecontact>
+</application>

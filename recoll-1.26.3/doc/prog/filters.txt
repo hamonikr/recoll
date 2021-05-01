@@ -1,0 +1,47 @@
+/*!@filters
+
+\page filters About filters
+
+\section filtintro Overview
+
+Before a document can be processed either for indexing or previewing, it
+must be translated into an internal common format.
+
+The MimeHandler class defines the virtual interface for filters. There are
+derived classes for text, html (MimeHandlerHtml), and mail folders
+(MimeHandlerMail)
+
+There is also a derived class (MimeHandlerExec) that will execute an
+external program to translate the document to simple html (to be further
+processed by MimeHandlerHtml).
+
+To extend Recoll for a new document type, you may either subclass the
+MimeHandler class (look at one of the existing subclasses), or write an
+external filter, which will probably be the simpler solution in most cases.
+
+\section extfilts External filters
+
+Filters are programs (usually shell scripts) that will turn a document of
+foreign type into something that Recoll can understand. HTML was chosen as
+a pivot format for its ability to carry structured information.
+
+The meta-information tags that Recoll will use at the moment are the
+following:
+
+     - title
+     - charset 
+     - keywords 
+     - description
+
+For an example, you can take a look at the rclsoff filter which translates
+openoffice documents.
+
+The filter is executed with the input file name as a parameter and should
+output the result to stdout.
+
+\section extassoc Associating a filter to a mime type
+
+This is done in the mimeconf configuration file. Take a look at the file,
+the format is self-explanatory.
+
+*/

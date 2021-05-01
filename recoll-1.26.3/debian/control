@@ -1,0 +1,104 @@
+Source: recoll
+Section: x11
+Priority: optional
+Maintainer: Kartik Mistry <kartik@debian.org>
+Build-Depends: bison,
+               debhelper (>= 12),
+               dh-python,
+               dpkg-dev (>= 1.16.1~),
+               libaspell-dev,
+               libchm-dev,
+               libqt5webkit5-dev,
+               libx11-dev,
+               libxapian-dev (>= 1.4.0),
+               libxslt1-dev,
+               libz-dev,
+               python3-all-dev,
+               python3-setuptools,
+               qtbase5-dev
+Vcs-Git: https://salsa.debian.org/debian/recoll.git
+Vcs-Browser: https://salsa.debian.org/debian/recoll
+Homepage: https://www.lesbonscomptes.com/recoll
+Standards-Version: 4.4.1
+
+Package: recoll
+Architecture: all
+Depends: recollcmd, recollgui, ${misc:Depends}
+Description: Personal full text search package
+ This package is a personal full text search package is based on a very strong
+ backend (Xapian), for which it provides an easy to use and feature-rich
+ interface.
+ .
+ Features:
+  * Qt-based GUI.
+  * Supports the following document types (and their compressed versions).
+   - Natively: text, html, OpenOffice files, maildir and mailbox (Mozilla and
+     IceDove mail) with attachments, pidgin log files.
+   - With external helpers:  pdf (pdftotext), postscript (ghostscript), msword
+     (antiword), excel, rtf (unrtf).
+  * Powerful query facilities, with boolean searches, phrases, filter on file
+    types and directory tree.
+  * Support for multiple charsets, Internal processing and storage uses Unicode
+    UTF-8.
+  * Stemming performed at query time (can switch stemming language after
+    indexing).
+  * Easy installation. No database daemon, web server or exotic language
+    necessary.
+  * An indexer which runs either as a thread inside the GUI or as an external,
+    cron'able program.
+ .
+ This metapackage installs recoll GUI and commandline tools.
+
+Package: recollcmd
+Architecture: any
+Breaks: recoll (<< 1.23.7-2)
+Replaces: recoll (<< 1.23.7-2)
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: aspell, python3, python3-recoll, xdg-utils, xsltproc
+Suggests: antiword,
+          djvulibre-bin,
+          ghostscript,
+          groff,
+          libimage-exiftool-perl,
+          libinotifytools0,
+          libwpd-tools,
+          poppler-utils,
+          pstotext,
+          python3-chardet,
+          python3-chm,
+          python3-icalendar,
+          python3-lxml,
+          python3-mido,
+          python3-mutagen,
+          python3-rarfile,
+          python3-six,
+          unrtf,
+          untex,
+          wv
+Description: Command line programs for recoll
+ This package contains command line programs for a personal full text search
+ package recoll.
+
+Package: recollgui
+Architecture: any
+Breaks: recoll (<< 1.23.7-2)
+Replaces: recoll (<< 1.23.7-2)
+Depends: recollcmd (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Description: GUI program and elements for recoll
+ This package contains main recoll GUI for configuring, controlling and
+ querying recoll indexes.
+
+Package: python3-recoll
+Architecture: any
+Section: python
+Depends: python3,
+         recollcmd (= ${binary:Version}),
+         ${misc:Depends},
+         ${python3:Depends},
+         ${shlibs:Depends}
+Description: Python extension for recoll (Python3)
+ Personal full text search package which is based on a very strong backend
+ (Xapian), for which it provides an easy to use and feature-rich interface.
+ .
+ This package provides Python3 extension module for recoll which can be use to
+ extend recoll such as an Ubuntu Unity Lens.

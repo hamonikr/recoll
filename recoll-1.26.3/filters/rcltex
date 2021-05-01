@@ -1,0 +1,112 @@
+#!/bin/sh
+# @(#$Id: rcltex,v 1.2 2007-11-09 15:56:14 dockes Exp $  (C) 2004 J.F.Dockes
+#================================================================
+# Translate TeX files for recoll. Uses either untex or detex to translate to html
+#================================================================
+# set variables
+LANG=C ; export LANG
+LC_ALL=C ; export LC_ALL
+progname="rcltex"
+filetype=TeX
+
+
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+# Try to detect encoding
+encoding=`egrep '\usepackage\[.*\]{inputenc}' "$infile" | \
+                sed -e 's/.*\[//' -e 's/\].*//'`
+if test "X$encoding" = X ; then
+    encoding=latin1
+fi
+if test "X$encoding" = Xutf8x ; then
+    encoding=utf8
+fi
+
+if iscmd detex ; then
+    checkcmds iconv
+    CMD="detex -n -e ''"
+else
+    checkcmds untex iconv
+    CMD="untex -giso -a"
+fi
+
+# output the result
+cat <<EOF
+<html><head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body><pre>
+EOF
+
+$CMD "$infile" | \
+   iconv -c -f "$encoding" -t utf-8 | \
+   sed -e 's/</&lt;/g' -e 's/&/&amp;/g' 
+
+echo '</pre></body></html>'
+
+# exit normally
+exit 0

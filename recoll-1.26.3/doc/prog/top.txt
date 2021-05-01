@@ -1,0 +1,20 @@
+/*!@mainpage  Recoll: A personal/desktop text-search program
+\author email address: jfd@recoll.org
+
+\section intro Introduction
+
+Home page: http://www.recoll.org
+
+This is the documentation for Recoll, a personal text search tool. Recoll
+is written in C++, has a QT-based gui and uses the <a
+href="http://www.xapian.org">Xapian</a> full text search engine.
+
+Recoll supports a number of document types, the decoding of which is either
+performed with internal code or an externally executed, program. 
+
+It should be relatively easy to write a new filter for some yet unsupported
+file type, and the documentation for this is found here: <a
+href="filters.html">Writing input filters</a> 
+
+*/
+

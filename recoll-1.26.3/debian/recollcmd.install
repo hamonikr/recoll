@@ -1,0 +1,10 @@
+usr/bin/recollindex
+usr/bin/recollq
+usr/bin/xadump
+usr/lib/*/recoll
+usr/lib/python*/*-packages/recollchm-*/*
+usr/lib/python*/*-packages/recollchm/*
+usr/share/man
+usr/share/recoll/doc
+usr/share/recoll/examples
+usr/share/recoll/filters

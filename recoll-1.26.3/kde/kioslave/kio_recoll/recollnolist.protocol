@@ -1,0 +1,11 @@
+[Protocol]
+exec=kio_recoll
+protocol=recoll
+input=none
+output=filesystem
+# Version for kde4.0: no "listing" entry
+reading=true
+defaultMimeType=text/html
+Icon=recoll
+Class=:local
+URIMode=rawuri

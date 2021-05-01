@@ -1,0 +1,144 @@
+#!/bin/sh
+# @(#$Id: rclgaim,v 1.4 2007-06-08 13:51:08 dockes Exp $  (C) 2004 J.F.Dockes
+# Parts taken from Estraier:
+#================================================================
+# Estraier: a personal full-text search system
+# Copyright (C) 2003-2004 Mikio Hirabayashi
+#================================================================
+#================================================================
+# Extract text and other information from gaim logs
+#
+#================================================================
+
+# set variables
+LANG=C ; export LANG
+LC_ALL=C ; export LC_ALL
+progname="rclgaim"
+filetype="gaim log"
+
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+checkcmds awk iconv 
+
+awk '
+# First line: parse from, to , output html header
+NR == 1 {
+    if (NF != 9) {
+       printf("Bad format: (NF %d) %s\n", NF, $0)
+       exit 1
+    }
+    to = $3
+    from = $8
+    proto = $9
+    date = $5 " " $6
+    #printf("from [%s] to [%s] proto [%s] date [%s]\n", from, to, proto, date)
+    print "<html><head>"
+    print "<title> " $0 "</title>"
+    print "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso8859-1\">"
+    # Yes there is no such thing as a "date" meta tag. This probably should
+    # be http-equiv=last-modified or such
+    printf("<meta name=\"date\" content=\"%s\">\n", date)
+    print "</head><body>"
+
+    # Remember who the main persons are.
+    authors[from] = "yes"
+    authors[to] = "yes"
+    next
+}
+# Message first line. We strip from/to and time when indexing
+/^\([0-2][0-9]:[0-5][0-9]:[0-5][0-9]\)/ {
+    if (ENVIRON["RECOLL_FILTER_FORPREVIEW"] == "yes") {
+       # Preview: output everything
+        print $0 " " "<br>"
+    } else {
+	# Index: output only text, except each new author once
+	#printf("INDEX: NF %d [%s] [%s] [%s] ", NF, $1, $2, $3);
+	from = $2
+	sub(":$", "", from);
+	if (authors[from] == "") {
+	   authors[from] = "yes"
+	   printf("%s : ", from);
+	}
+        for (idx = 3; idx <= NR; idx++) {
+            printf("%s ", $idx)
+	}
+	printf("<br>\n")
+    }
+    next
+}
+# Continuation line: print it
+{
+    printf("%s <br>\n", $0) 
+}
+END {
+    printf("</body></html>\n")
+}
+' < "$infile"
+
+# exit normally
+exit 0

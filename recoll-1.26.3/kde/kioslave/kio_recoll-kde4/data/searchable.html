@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Recoll searchable HTML</title>
+
+    <script language="JavaScript">
+      function recollsearch() {
+          var t = document.getSelection();
+          window.location.href = 'recoll://search/query?qtp=a&p=0&q=' +
+              encodeURIComponent(t);
+      }   
+   </script>
+
+  </head>
+
+  <body ondblclick="recollsearch()">
+
+    <h2>A <b>Recoll</b>-searchable HTML page </h2>
+
+    <p>This is a text sample in which links have been inserted for
+      words, such as <a href="recoll:/system installation">system installation</a>, 
+      which can be searched for in the whole document set by
+      using <a href="recoll:/recoll">recoll</a></p>
+    
+    <p>Also a little bit of javascript magic can make
+      all words searchable (try double-clicking any word).</p>
+
+</body>
+</html>

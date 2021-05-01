@@ -1,0 +1,39 @@
+#!/bin/sh
+# A small script to help recoll start info on the node corresponding to 
+# the result document. The title is the node path, but it needs to be
+# somewhat processed
+
+fatal()
+{
+    echo $*
+    exit 1
+}
+Usage()
+{
+    fatal "Usage: rclshowinfo filename top node / sub node [/ ...]"
+}
+
+test $# -ge 2 || Usage
+filename=`echo $1 | sed -e 's!^file://!!'`
+shift
+
+# The title set by recoll while indexing is like:
+# infofilename / first node path element / second node path element ...
+IFS=/
+set $*
+while test $# -gt 1;do
+  shift
+# node=`echo $1 | sed -e 's/^ *//' -e 's/ *$//'`
+  node=`eval "echo $1"`
+  nodepath="$nodepath '$node'"
+done
+
+for t in x-terminal-emulator gnome-terminal konsole xfce4-terminal xterm ; do
+
+    tp=`which $t`
+    echo "termpath $tp"
+    if test X"$tp" != X ; then
+        set -x
+        exec "$tp" -e "info -f $filename $nodepath"
+    fi
+done

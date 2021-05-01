@@ -1,0 +1,198 @@
+#!/usr/bin/perl
+# @(#$Id: rclimg,v 1.5 2008-10-09 06:41:21 dockes Exp $  (C) 2007 Cedric Scott
+#######################################################
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the
+# Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+######################################################
+
+#
+# Extract image tags with exiftool and convert the data to html for
+# recoll indexing.
+#
+
+#
+# maps image file tags to xapian tags
+#
+$tagMap = {
+	'subject' => 'subject',
+	'comment' => 'description',
+	'title' => 'title',
+	'headline' => 'title',
+	'caption' => 'caption',
+	'caption-abstract' => 'caption',
+	'author' => 'author',
+	'creator' => 'creator',
+	'from' => 'from',
+	'keywords' => 'keywords',
+	'keyword' => 'keyword',
+	'tag' => 'tag',
+};
+
+# set to non-zero if tags which map to xapian tags are to output
+# in the body as well as the header
+#
+$headAndBody = 1;
+
+# xapianTag
+# returns a xapian tag to be used for this tag
+#
+sub xapianTag {
+	my $imgtag = shift;
+	while ( ( $tagre, $xapiantag) = each %{$tagMap} ) {
+		return $xapiantag  if $imgtag =~ /^$tagre$/i;
+	}
+	return undef;
+}
+
+sub imgTagsToHtml {
+    my $imageFile = shift;
+    my $output = "";
+    $imageFile = '-' if $imageFile eq '';
+    unless ( open(IMGF, $imageFile)  ) {
+	print STDERR "$0: can't open file $imageFile\n";
+	return $output; # file doesn't exist or can't be read
+    }
+    $info = ImageInfo(\*IMGF);
+    return $output unless $info;
+    close(\*IMGF);
+    $fields = [];
+    $other = [];
+    $titleHtmlTag = "";
+    foreach $tagname ( sort keys %{$info} ) {
+	$xapiantag = xapianTag($tagname);
+	if (defined $xapiantag ) {
+	    if ($xapiantag eq 'title') {
+                if ($titleHtmlTag) {
+                    $titleHtmlTag = $titleHtmlTag . " - $info->{$tagname}";
+                } else {
+                    $titleHtmlTag = $info->{$tagname};
+                }
+	    } else {
+                push @{$fields}, [ $xapiantag, $info->{$tagname} ];
+            }
+            push @{$other}, [ $tagname, $info->{$tagname} ] if $headAndBody;
+	} else {
+	    push @{$other}, [ $tagname, $info->{$tagname} ];
+	}
+    }
+    $output = "<html>\n<head>\n";
+    if ($titleHtmlTag) {
+        $output = $output . "<title>" . $titleHtmlTag . "</title>\n";
+    }
+    $output = $output . 
+     "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">\n";
+    foreach $tagpair ( @{$fields} ) {
+	($tagname, $value) = @{$tagpair};
+	$output = $output . "<meta name=\"$tagname\" content=\"$value\">\n";
+    }
+    $output = $output . "</head><body>\n";
+    foreach $tagpair (@{$other} ) {
+	($tagname, $value) = @{$tagpair};
+	$output = $output . sprintf("%30s : %s<br>\n", $tagname, $value);
+    }
+    $output = $output . "</body>\n</html>\n";
+    return $output;
+}
+
+
+####################################################################
+# Code for the rclexecm filter<->indexer protocol from here
+
+# Get one line from stdin (from recollindex), exit on eof
+sub readlineorexit {
+    my $s = <STDIN>;
+    unless ($s) {
+        # print STDERR "RCLIMG: EOF\n";
+	exit 0;
+    }
+    return $s
+}
+
+# Read one named parameter
+sub readparam {
+    my $s = readlineorexit();
+    if ($s eq "\n") {
+        return ("","");
+    }
+    my @l = split(' ', $s);
+
+    if (scalar(@l) != 2) {
+        print STDERR "RCLIMG: bad line:", $s;
+	exit 1;
+    }
+    my $paramname = lc $l[0];
+    my $paramsize = $l[1];
+    if ($paramsize > 0) {
+        my $n = read STDIN, $paramdata, $paramsize;
+        if ($n != $paramsize) {
+    	    print STDERR "RCLIMG: [$paramname] expected $paramsize, got $n\n";
+            exit 1;
+        }
+    }
+    # print STDERR "RCLIMG: [$paramname] $paramsize bytes: [$paramdata]\n";
+    return ($paramname, $paramdata);
+}
+
+#
+# Main program starts here. Talks the rclexecm protocol
+#
+
+# JFD: replaced the "use" call with a runtime load with error checking,
+# for compat with the missing filter detection code.
+use Image::ExifTool qw(:Public);
+eval {require Image::ExifTool; Image::ExifTool->import(qw(:Public));}; 
+if ($@) {
+	print "RECFILTERROR HELPERNOTFOUND Perl::Image::ExifTool\n";
+	exit(1);
+}
+
+binmode(STDIN)      || die "cannot binmode STDIN";
+binmode(STDOUT)     || die "cannot binmode STDOUT";
+
+#print STDERR "RCLIMG: Starting\n";
+$| = 1;
+while (1) {
+    # print STDERR "RCLIMG: waiting for command\n";
+
+    my %params = ();
+    # Read at most 10 parameters (we only actually use one), stop at empty line
+    for($i = 1; $i < 10; $i++) {
+        my ($name, $value) = readparam;
+        if ($name eq "") {
+            last;
+	}
+        $params{$name} = $value;
+    }
+    unless (defined $params{"filename:"}) {
+        print STDERR "RCLIMG: no filename ??\n";
+	# Recoll is requesting next subdocument (it shouldn't cause we 
+	# returned eofnext last time), but we have none, just say so:
+        print "Eofnow:0\nDocument: 0\n\n";
+	next;
+    }
+
+    print "Mimetype: 9\ntext/html";
+    my $data = imgTagsToHtml($params{"filename:"});
+    my $l = length($data);
+    print "Document: $l\n";
+    # print STDERR "RCLIMG: writing $l bytes of data\n";
+    print $data;
+    # Say we have no further documents for this file
+    print "Eofnext: 0\n";
+    # End of output parameters: print empty line
+    print "\n";
+    # print STDERR "RCLIMG: done writing data\n";
+}
+#print STDERR "RCLIMG: Exiting\n";

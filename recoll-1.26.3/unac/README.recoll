@@ -1,0 +1,10 @@
+This is a stripped down and modified version of unac-1.7.0
+You can find the full original distribution at http://www.senga.org/unac/
+You can find the full version used by Recoll at the following url:
+
+http://bitbucket.org/medoc/recoll/src/tip/unac/
+
+See AUTHORS and COPYING for tributes, etc.
+
+Dont bother Loic Dachary about bugs in this version, you can find the culprit
+here: jfd@recoll.org

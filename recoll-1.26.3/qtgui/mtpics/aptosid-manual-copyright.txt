@@ -1,0 +1,306 @@
+This package was debianized by Kel Modderman <kel@otaku42.de> on
+Mon,  9 Apr 2007 13:54:11 +1000.
+
+It was downloaded from http://developer.berlios.de/projects/fullstory/
+
+Files: lib/*
+Copyright: © 2006-2010 Trevor Walkley (bluewater) <trevor_walkley@aptenodytes.org>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: bg/*
+Copyright: © 2008-2009 manul <vnaskov@gmail.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: da/*
+Copyright: © 2006-2009 Rasmus Pørksen <rasmus@greenin.dk>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: de/*
+Copyright: © 2006-2010 Markus Huber <markus.huber@yahoo.de>
+           © 2006-2009 Markus Müller <akamoto@ml1.net>
+           © 2006-2009 Philipp Rudolph <philipp.rudolph@gmail.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License.. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: el/*
+Copyright: © 2008-2008 Gregory Gretri (grigris) siduxgr@gmail.com
+           © 2008-2010 Nikolas Poniros (edhunter)edhunter@TBA.com
+           © 2007-2008 mixalis (miles) georgiou mechmg93@gmail.com
+           © 2007-2008 Pavlos (lathspell) fubar.ath@gmail.com
+           © 2007-2008 Lazaros (riddle3)lazarost@gmail.com
+           © 2007-2008 spyros melcher (xouzouris) <spyrakos73@gmail.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: en/*
+Copyright: © 2006-2010 Trevor Walkley <trevor_walkley@aptenodytes.org>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: es/*
+Copyright: © 2006-2009 Richard Holt <richard.holt@gmail.com>
+           © 2009-2010 Luis_P
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: fr/*
+Copyright: © 2006-2009 Philippe Masson <isotran@free.fr>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: hr/*
+Copyright: © 2006-2009  Dinko Sabo <cobra@TBA.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: hu/*
+Copyright: © 2008-2009 mrowl Bagoj Ur <bagoj.ur@gmail.com>
+           © 2008-2009 ruess reuss@chello.hu
+           © 2008-2009 Siposs Zoltan <zoltan.siposs@gmail.com>
+	   © 2008-2009 honorshark honorshark@gmail.com
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License.Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: it/*
+Copyright: © 2008-2009  Renato Zanotti zenren@tiscali.it
+           © 2008-2009  speedygeo speedygeo@email.it
+           © 2007-2009  Stefano Tombolini dedo.tombolini@gmail.com
+           © 2008-2010  Alessio Giustini alessio@alessiogiustini.com
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: ja/*
+Copyright: © 2006-2009 Mutsumu Nomura <muchan.m@gmail.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: nl/*
+Copyright: © 2006-2010 S R Eissens <eisman@zonnet.nl>
+           © 2007-2009 Ronald Stam <ronald.stam@gmail.com>
+           © 2007-2009 HarzG <hqmg@gmx.net>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: pl/*
+Copyright: © 2006-2008 Marcin Słotwiński <mslotwinski@wp.pl>
+		© 2008-2009 Michael R' Tokarczyk <mrtokarczyk@gmail.com>
+		© 2009 dongle
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: pt-br/*
+Copyright: © 2006-2010 Jose Tadeu Barros <jotatb@yahoo.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: ro/*
+Copyright: © 2006-2008 Gabriel Palade <ladepa@gmail.com>
+	   © 2009-2010 Dorin Vatavu <dorin.vatavu@gmail.com>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: ru/*
+Copyright: © 2006-2010 Roland Engert <Roland.Engert@web.de>
+           © 2006-2007 Dmytro Kychenko <dmytro@gmx.net>
+           © 2006-2007 Mikhail Burov <vonselbst@gmail.com>
+	   © 2009 kostiagol
+
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: menu/*
+Copyright: © 2006-2010 Trevor Walkley <trevor_walkley@aptenodytes.org>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: debian/*
+Copyright: © 2007, Kel Modderman <kel@otaku42.de>
+License: GPL-2+
+  The Debian packaging information is licensed under the GNU General
+  Public License, version 2 or later.
+
+Files: menu/*
+Copyright: © 2006-2010 Trevor Walkley <trevor_walkley@aptenodytes.org>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License.. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: menu/icons/*
+Copyright: © 2010 Rick Battle <rick.battle@celtrenicdesigns.com>
+	   © 2008-2010 Bernard Gray <bernard.gray@gmail.com>
+           © 2008 David Creedy <djcreedy@iinet.net.au>
+           © 2007 David Vignoni <david@icon-king.com>
+           © 2007 Johann Ollivier Lapeyre <johann@oxygen-icons.org>
+           © 2007 Kenneth Wimer <kwwii@bootsplash.org>
+           © 2007 Nuno Fernades Pinheiro <nf.pinheiro@gmail.com>
+           © 2007 Riccardo Iaconelli <riccardo@oxygen-icons.org>
+           © 2007 David Miller <miller@oxygen-icons.org>
+License: CC-ASA-3.0 | LGPL-2+ | GPL-2+
+  aptosid-manual.svg also includes elements from The Oxygen Icon Theme.
+  Licensed under the Creative Common Attribution-ShareAlike 3.0
+  license, as found here:
+
+    http://creativecommons.org/licenses/by-sa/3.0/
+
+  or the GNU Library General Public License (with following clarification).
+
+  Clarification:
+  The GNU Lesser General Public License or LGPL is written for
+  software libraries in the first place. We expressly want the LGPL to
+  be valid for this artwork library too.
+
+  KDE Oxygen theme icons is a special kind of software library, it is an
+  artwork library, it's elements can be used in a Graphical User Interface, or
+  GUI.
+
+  Source code, for this library means:
+   - where they exist, SVG;
+   - otherwise, if applicable, the multi-layered formats xcf or psd, or
+  otherwise png.
+
+  The LGPL in some sections obliges you to make the files carry
+  notices. With images this is in some cases impossible or hardly useful.
+
+  With this library a notice is placed at a prominent place in the directory
+  containing the elements. You may follow this practice.
+
+  The exception in section 6 of the GNU Lesser General Public License covers
+  the use of elements of this art library in a GUI.
+
+Files: *
+Copyright: © 2006-2010 Trevor Walkley <trevor_walkley@aptenodytes.org>
+License: GFDL-1.2+
+  All content is © 2006-2010 and released
+  under GNU Free Documentation License. Permission is granted to copy,
+  distribute and/or modify this document under the terms of the GNU
+  Free Documentation License, Version 1.2 or any later version
+  published by the Free Software Foundation; with no Invariant
+  Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
+
+Files: *Coloured sidux Book Icons (type2)
+
+Copyright (C) 2007  by spacepenguin, cako and cathbard (http://sidux.com)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+I suggest a copy be kept in your sources for safe keeping
+________________________________________________________________________________
+On Debian systems, the complete text of the GNU Free Documentation License,
+version 2, can be found in `/usr/share/common-licenses/GFDL-1.2'.
+
+On Debian systems, the complete text of the GNU General Public License,
+version 2, can be found in `/usr/share/common-licenses/GPL-2'.
+
+On Debian systems, the complete text of the GNU Lesser General Public License,
+version 2, can be found in `/usr/share/common-licenses/LGPL-2'.
+
+The Debian packaging is © 2007--2010, Kel Modderman <kel@otaku42.de> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.

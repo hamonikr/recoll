@@ -1,0 +1,93 @@
+$Header: /cvsroot/unac/unac/README,v 1.5 2002/09/02 10:40:09 loic Exp $
+
+What is it ?
+------------
+
+unac is a C library that removes accents from characters, regardless
+of the character set (ISO-8859-15, ISO-CELTIC, KOI8-RU...)  as long as
+iconv(3) is able to convert it into UTF-16 (Unicode).  For instance
+the string été will become ete.  It provides a command line interface
+(unaccent) that removes accents from an input flow or a string given
+in argument. When using the library function or the command, the
+charset of the input must be specified. The input is converted to
+UTF-16 using iconv(3), accents are removed and the result is converted
+back to the original charset. The iconv -l command on GNU/Linux will
+show all charset supported.
+
+Where is the documentation ?
+----------------------------
+
+The manual page of the unaccent command : man unaccent.
+The manual page of the unac library : man unac.
+
+How to install it ?
+-------------------
+
+For OS that are not GNU/Linux we recommend to use the iconv library
+provided by Bruno Haible <haible@ilog.fr> at
+ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.8.tar.gz.
+
+./configure [--with-iconv=/my/local]
+
+make all
+
+make check
+
+make install
+
+How to link with unac ?
+-------------------------
+
+Assuming you've installed unac in the /usr/local directory use something 
+similar to the following:
+
+In the sources:
+...
+#include <unac.h>
+...
+
+On the command line:
+
+cc -I/usr/local/include -o prog prog.cc -L/usr/local/lib -lunac 
+
+Where can I download it ?
+-------------------------
+The main distribution site is http://www.senga.org/unac/.
+
+What is the license ?
+---------------------
+unac is distributed under the GNU GPL, as found at 
+http://www.gnu.org/licenses/gpl.txt. Unicode data files are
+under the following license, which is compatible with the 
+GNU GPL:
+
+http://www.unicode.org/Public/3.2-Update/UnicodeData-3.2.0.html#UCD_Terms
+UCD Terms of Use
+
+Disclaimer
+
+The Unicode Character  Database is provided as is  by Unicode, Inc. No
+claims  are  made  as  to  fitness  for  any  particular  purpose.  No
+warranties of any kind are  expressed or implied. The recipient agrees
+to determine  applicability of information provided. If  this file has
+been purchased  on magnetic or  optical media from Unicode,  Inc., the
+sole remedy for  any claim will be exchange  of defective media within
+90 days of receipt.
+
+This disclaimer  is applicable for  all other data  files accompanying
+the Unicode  Character Database, some  of which have been  compiled by
+the Unicode Consortium, and some  of which have been supplied by other
+sources.  Limitations on Rights to Redistribute This Data
+
+Recipient is granted the right to make copies in any form for internal
+distribution  and  to  freely  use  the information  supplied  in  the
+creation of  products supporting the Unicode(TM)  Standard.  The files
+in  the  Unicode Character  Database  can  be  redistributed to  third
+parties or other organizations (whether  for profit or not) as long as
+this notice  and the disclaimer notice are  retained.  Information can
+be extracted from  these files and used in  documentation or programs,
+as long as there is an accompanying notice indicating the source.
+
+Loic Dachary
+loic@senga.org
+http://www.senga.org/

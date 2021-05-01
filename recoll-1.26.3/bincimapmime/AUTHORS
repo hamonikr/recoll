@@ -1,0 +1,45 @@
+The following parties have participated in writing code or otherwise
+contributed to the Binc IMAP project:
+
+Author:
+Andreas Aardal Hanssen                  <andreas-binc@bincimap.org>
+
+Several users have been very helpful with bug reports and suggestions, and
+the author is very grateful for their contributions.
+
+Some users have also gone to the extra effort of debugging the cause of a
+bug, or have found a way of implementing a feature, and have either provided
+a very good description of what is needed, or they have actually provided a
+patch that has been added to Binc IMAP.
+
+While adding extra value to the discussion around the discovery of a bug or
+the evaluation of a new feature, these contributors also take some load of
+the author's back, so they deserve extra thanks.
+
+In this list are also included people who have contributed with mirrors and
+translations of the web pages.
+
+Henry Baragar                           <Henry.Baragar (a) Instantiated.Ca>
+Jürgen Botz                             <jurgen (a) botz.org>
+Charlie Brady                           <charlieb (a) e-smith.com>
+Caskey Dickson                          <caskey (a) technocage.com>
+Ketil Froyn                             <ketil (a) froyn.name>
+Gary Gordon                             <gv-mail (a) mygirlfriday.info>
+Marek Gutkowski                         <marek (a) moveo.pl>
+Daniel James                            <daniel_james (a) eml.cc>
+Zak Johnson                             <zakj (a) nox.cx>
+Sergei Kolobov                          <sergei (a) kolobov.com>
+Rafal Kupka                             <kupson (a) kupson.fdns.net>
+Eivind Kvedalen                         <bincimap (a) eivind.kvedalen.name>
+HIROSHIMA Naoki                         <naokih (a) iron-horse.org>
+Greger Stolt Nilsen			<greger (a) psychoproject.net>
+John Starks                             <jstarks (a) starksnet.net>
+Peter Stuge                             <stuge-binc (a) cdy.org>
+Gerrit Pape                             <pape (a) smarden.org>
+Jeremy Rossi                            <jeremy (a) jeremyrossi.com>
+Dale Woolridge                          <dale-contrib-bincimap (a) woolridge.org>
+
+If you have contributed to the Binc IMAP project but are not listed here
+(this happens quite often), please send a mail to andreas-binc@bincimap.org
+and I'll add you to the list.
+

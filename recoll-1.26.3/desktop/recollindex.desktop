@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Recoll real time indexer
+Comment=Runs in background to extract and index text from modified documents
+Icon=system-run
+Exec=recollindex -w 60 -m
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=Utility;Filesystem;Database;
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-KDE-autostart-after=panel
+X-KDE-UniqueApplet=true

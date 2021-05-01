@@ -1,0 +1,170 @@
+.TH XADUMP 1 "18 November 2017"
+.SH NAME
+xadump \- low level access to a Recoll Xapian index.
+.SH SYNOPSIS
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-i
+<docid>
+.B \-D
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-i
+<docid>
+.B \-X
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-i
+<docid>
+[
+.B \-x
+]
+.B \-T
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-i
+<docid>
+[
+.B \-x
+]
+.B \-r
+
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-t
+<term>
+.B \-E
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-t
+<term>
+.B \-F
+.br
+.B xadump
+[
+.B \-d
+<dbdir>
+]
+[
+.B \-e
+<outputencoding>
+]
+.B \-t
+<term>
+.B \-P
+
+.br
+.B xadump
+.B \-T
+[
+.B \-f
+]
+[
+.B \-n
+]
+[
+.B \-l
+]
+
+.br
+.B xadump
+.B \-q
+term [term ...]
+
+
+.SH DESCRIPTION
+The
+.B xadump
+command is a low-level access and diagnostic tool for a Xapian index as
+organized by the Recoll indexer. The index directory to be used is
+specified with option
+.B \-d.
+.PP
+Options -D, -X, -T and -r take a single
+.B docid
+argument specified with option
+.B \-i.
+.B \-D
+displays the document data record.
+.B \-X
+deletes all index data for the document.
+.B \-T
+prints the term list for the document. Without a docid argument, this
+option will list the whole index term list. 
+.B \-f
+can be set to precede each term with its occurrence count (only if no
+docid is specified).
+.B \-n
+can be set to omit the enclosing brackets.
+.B \-l
+can be set to skip prefixed terms.
+.B \-r
+prints the document text as reconstructed from index data.
+
+When option
+.B \-x
+is set, terms are printed with each character separated by a space, which
+can be useful to check some encoding issues.
+.PP
+Options -E, -F and -P all need a term argument, specified with
+.B \-t
+<term>.
+.B \-E
+performs a term existence test.
+.B \-F
+retrieves the term frequency for the given term.
+.B \-P
+displays the postings for the given term.
+.PP
+With option
+.B \-q,
+xadump performs a simple AND query on the index, using the given term
+arguments.
+

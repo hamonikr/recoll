@@ -1,0 +1,103 @@
+.\" $Id: recoll.1,v 1.3 2007-11-13 18:42:18 dockes Exp $ (C) 2005 J.F.Dockes\$
+.TH RECOLL 1 "8 January 2006"
+.SH NAME
+recoll \- user interface for the Recoll full text search system
+.SH SYNOPSIS
+.B recoll
+[
+.B \-c
+<configdir>
+]
+[
+.B \-o
+|
+.B \-l
+|
+.B \-f
+|
+.B \-a
+]
+[
+.B \-t
+]
+[
+.B \-q
+<query>
+]
+
+.B recoll
+[
+.B \-c
+<configdir>
+]
+<url>
+.SH DESCRIPTION
+In the first form, the
+.B recoll
+command will start the graphical user interface for querying the 
+.B Recoll 
+database.
+.PP
+On the first run, 
+.B recoll
+will create the user configuration which can be customized
+before starting the first indexation.
+.PP
+The 
+.B \-c 
+option specifies the configuration directory name, overriding the
+default or $RECOLL_CONFDIR.
+.PP
+The 
+.B \-q 
+option can be used to specify an initial query on the command line. This
+query will be interpreted by default as a query language string.
+If
+.B \-a 
+is specified, the query string will be interpreted as an
+.I all words
+simple search query. If 
+.B \-o 
+is specified, the query string will be interpreted as an
+.I any word
+simple search query. If 
+.B \-f
+is specified, the query string will be interpreted as a
+.I file name
+simple search query. If 
+.B \-l
+is specified, the query string will be interpreted as a
+.I query language
+simple search query.
+.PP
+If 
+.B \-t
+is specified, or if
+.B recoll
+is called as
+.B recollq
+(through a link), the Graphical User Interface will not be started, and results
+will be printed to the standard output. Additional options understood by
+the 
+.B recollq
+command may be specified in this case. These can control the output format
+and the maximum number of results to be printed.
+.PP
+Please refer to online help for a full description.
+.PP
+In the second form, the 
+.B recoll
+command can be used to start a native viewer for a document indexed by
+Recoll. It will understand a final URL fragment (separated by a '#'
+character) to indicate an 
+.I ipath
+, the specifier for the part of the Recoll document access path which is is
+internal to a container such as a mbox folder or a zip archive, and will,
+if needed, create a temporary file to let a normal system utility display
+the document.
+.PP
+The second form is mostly used for opening embedded documents from the
+Ubuntu Unity Recoll lens.
+.SH SEE ALSO
+.PP 
+recollindex(1) recollq(1) recoll.conf(5) 

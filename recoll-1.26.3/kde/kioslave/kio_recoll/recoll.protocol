@@ -1,0 +1,11 @@
+[Protocol]
+exec=kio_recoll
+protocol=recoll
+Icon=recoll
+input=none
+output=filesystem
+listing=Name,Type, URL
+reading=true
+Class=:local
+URIMode=rawuri
+defaultMimeType=text/html

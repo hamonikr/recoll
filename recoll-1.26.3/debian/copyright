@@ -1,0 +1,141 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: recoll
+Upstream-Contact: Jean-Francois Dockes <jf@dockes.org>
+Source: https://www.lesbonscomptes.com/recoll/
+
+Files: *
+Copyright: 2005-2019, Jean-Francois Dockes <ijf@dockes.org>
+License: GPL-2+
+
+Files: bincimapmime/*
+Copyright: 2002-2005, Andreas Aardal Hanssen <andreas-binc@bincimap.org>
+License: GPL-2+
+
+Files: filters/rcl* internfile/htmlparse.cpp
+Copyright: 2000-2004, Mikio Hirabayashi
+License: GPL-2+
+
+Files: filters/rclpython
+Copyright: J\xfcrgen Hermann, Mike Brown, Christopher Arndt
+ <http://chrisarndt.de/en/software/python/colorize.html>
+License: GPL-2+
+
+Files: internfile/htmlparse.cpp internfile/mh_html.cpp
+Copyright: 1999-2001, BrightStation PLC,
+           2001, Ananova Ltd,
+           2002-2004, Olly Betts.
+License: GPL-2+
+
+Files: unac/*
+Copyright: 2000-2002, Loic Dachary <loic@senga.org>
+License: GPL-2+
+
+Files: common/*
+Copyright: 2004-2005, J.F.Dockes
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2007-2019, Kartik Mistry <kartik@debian.org>
+License: GPL-2+
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify it under
+ the terms of the GNU General Public License as published by the Free Software
+ Foundation; either version 2 of the License, or (at your option) any later
+ version.
+ .
+ This package is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License along with
+ this package; if not, write to the Free Software Foundation, Inc., 51 Franklin
+ St, Fifth Floor, Boston, MA 02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU General Public License can be
+ found in `/usr/share/common-licenses/GPL-2' and
+ `/usr/share/common-licenses/GPL-3'.
+
+Files: aspell/*
+Copyright: 2001-2002, by Kevin Atkinson
+License: LGPL-2+
+
+License: LGPL-2+
+ This package is free software; you can redistribute it and/or modify it under
+ the terms of the GNU Lesser General Public License as published by the Free
+ Software Foundation; either version 2 of the License, or (at your option) any
+ later version.
+ .
+ This package is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU Lesser General Public License along
+ with this package; if not, write to the Free Software Foundation, Inc., 51
+ Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU Lesser General Public License
+ can be found in `/usr/share/common-licenses/LGPL-2' and
+ `/usr/share/common-licenses/LGPL-2.1' and `/usr/share/common-licenses/LGPL-3'.
+
+Files: common/uproplist.h
+Copyright: 1991-2006, Unicode, Inc.
+License: Unicode
+
+License: Unicode
+ All rights reserved. Distributed under the Terms of Use in
+ https://www.unicode.org/copyright.html
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of the Unicode data files and any associated documentation (the "Data Files")
+ or Unicode software and any associated documentation (the "Software") to deal
+ in the Data Files or Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, and/or
+ sell copies of the Data Files or Software, and to permit persons to whom the
+ Data Files or Software are furnished to do so, provided that (a) the above
+ copyright notice(s) and this permission notice appear with all copies of the
+ Data Files or Software, (b) both the above copyright notice(s) and this
+ permission notice appear in associated documentation, and (c) there is clear
+ notice in each modified Data File or in the Software as well as in the
+ documentation associated with the Data File(s) or Software that the data or
+ software has been modified.
+ .
+ THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+ KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF THIRD
+ PARTY RIGHTS. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN
+ THIS NOTICE BE LIABLE FOR ANY CLAIM, OR ANY SPECIAL INDIRECT OR CONSEQUENTIAL
+ DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+ ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE
+ DATA FILES OR SOFTWARE.
+ .
+ Except as contained in this notice, the name of a copyright holder shall not
+ be used in advertising or otherwise to promote the sale, use or other dealings
+ in these Data Files or Software without prior written authorization of the
+ copyright holder.
+
+Files: utils/md5.*
+Copyright: 1991-1992, RSA Data Security, Inc. All rights reserved.
+License: RSA
+
+License: RSA
+ MD5C.C - RSA Data Security, Inc., MD5 message-digest algorithm
+ .
+ License to copy and use this software is granted provided that it is
+ identified as the "RSA Data Security, Inc. MD5 Message-Digest Algorithm" in
+ all material mentioning or referencing this software or this function.
+ .
+ License is also granted to make and use derivative works provided that such
+ works are identified as "derived from the RSA Data Security, Inc. MD5
+ Message-Digest Algorithm" in all material mentioning or referencing the
+ derived work.
+ .
+ RSA Data Security, Inc. makes no representations concerning either the
+ merchantability of this software or the suitability of this software for any
+ particular purpose. It is provided "as is" without express or implied warranty
+ of any kind.
+ .
+ These notices must be retained in any copies of any part of this documentation
+ and/or software.

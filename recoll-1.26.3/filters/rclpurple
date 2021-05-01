@@ -1,0 +1,181 @@
+#!/bin/sh
+# @(#$Id: rclpurple,v 1.1 2008-09-15 08:00:17 dockes Exp $  (C) 2004 J.F.Dockes
+# Parts taken from Estraier:
+#================================================================
+# Estraier: a personal full-text search system
+# Copyright (C) 2003-2004 Mikio Hirabayashi
+#================================================================
+#================================================================
+# Extract text and other information from gaim logs
+#
+#================================================================
+
+# set variables
+LANG=C ; export LANG
+LC_ALL=C ; export LC_ALL
+progname="rclpurple"
+filetype="purple/pidgin log"
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+checkcmds awk
+
+awk '
+# First line: parse from, to , output html header
+NR == 1 {
+    if (NF != 14 && NF != 13 && NF != 9) {
+       printf("Bad format: (NF %d) %s\n", NF, $0)
+       exit 1
+    }
+    to = $3
+    if (NF == 14 || NF == 13) {
+        mon_i["Jan"] = "01"
+        mon_i["Feb"] = "02"    
+        mon_i["Mar"] = "03"
+        mon_i["Apr"] = "04"
+        mon_i["May"] = "05"
+        mon_i["Jun"] = "06"
+        mon_i["Jul"] = "07"
+        mon_i["Aug"] = "08"
+        mon_i["Sep"] = "09"
+        mon_i["Oct"] = "10"
+        mon_i["Nov"] = "11"
+        mon_i["Dec"] = "12"
+        date =  $8 "-" mon_i[$7] "-" $6 "T" $9
+        if (NF == 14) {
+            from = $13
+        }
+        if (NF == 13) {
+            from = $12
+        }
+    }
+
+    if (NF == 9) {
+        from = $8
+        date =  $5
+    }
+
+    #printf("from [%s] to [%s] date [%s]\n", from, to, date)
+
+    print "<html><head>"
+    print "<title> " $0 "</title>"
+
+    # Yes there is no such thing as a "date" meta tag. This probably should
+    # be http-equiv=last-modified or such, but recollindex understands "date"
+    printf("<meta name=\"date\" content=\"%s\">\n", date)
+
+    printf("<meta name=\"author\" content=\"%s\">\n", from)
+    printf("<meta name=\"recipient\" content=\"%s\">\n", to)
+    print "</head><body>"
+    print "<pre>"
+
+    if (ENVIRON["RECOLL_FILTER_FORPREVIEW"] == "yes") {
+        printf("%s\n", $0)
+    }
+
+    # Remember who the main persons are. This is so that we output
+    # them once while indexing the conversation body, to avoid giving
+    # excessive weight by repeated indexing to the term.
+    authors[from] = "yes"
+    authors[to] = "yes"
+    next
+}
+
+/^\([0-2][0-9]:[0-5][0-9]:[0-5][0-9]\)/ {
+    # Conversation element 1st line. We strip from/to (except 1st
+    # occurrence) and time when indexing.  Time is not interesting and
+    # repeated from/to indexing would give excessive weight
+    if (ENVIRON["RECOLL_FILTER_FORPREVIEW"] == "yes") {
+        # Preview: output everything
+        print $0
+    } else {
+	# Index: output only text, except each new author once. Unfortunately,
+        # it is too late to add them to the "author" field.
+	from = $2
+	sub(":$", "", from);
+	if (authors[from] == "") {
+	   authors[from] = "yes"
+	   printf("%s : ", from);
+	}
+        for (idx = 3; idx <= NR; idx++) {
+            printf("%s ", $idx)
+	}
+	printf("\n")
+    }
+    next
+}
+# Conversation element continuation line: print it
+{
+    printf("%s\n", $0) 
+}
+END {
+    printf("</pre></body></html>\n")
+}
+' < "$infile"
+
+# exit normally
+exit 0
