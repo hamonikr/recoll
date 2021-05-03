@@ -1,0 +1,190 @@
+#!/bin/sh
+# @(#$Id: rclscribus,v 1.4 2007-06-08 13:51:09 dockes Exp $  (C) 2004 J.F.Dockes
+# There may still be code from Estraier in here:
+#================================================================
+# Estraier: a personal full-text search system
+# Copyright (C) 2003-2004 Mikio Hirabayashi
+#================================================================
+#================================================================
+# Convert a scribus file to recoll HTML. This only handles the newer .sla
+# files until I can have a look at an older .scd.
+#
+# We just hack into the scribus XML, taking advantage that the tag of
+# interest is apparently always output on a single line.
+# The text seems to be found in attribute CH of tag ITEXT, it is utf-8
+#
+# Tried to convert this to xsltproc but it seems that quite a few
+# Scribus document are not actually proper xml
+
+# set variables
+LANG=C ; export LANG
+LC_ALL=C ; export LC_ALL
+progname="rclscribus"
+filetype=Scribus
+
+
+
+#RECFILTCOMMONCODE
+##############################################################################
+# !! Leave the previous line unmodified!! Code imported from the
+# recfiltcommon file
+
+# Utility code common to all shell filters. This could be sourced at run
+# time, but it's slightly more efficient to include the code in the
+# filters at build time (with a sed script).
+
+# Describe error in a way that can be interpreted by our caller
+senderror()
+{
+    echo RECFILTERROR $*
+    # Also alert on stderr just in case
+    echo ":2:$progname::: $*" 1>&2
+    exit 1
+}
+
+iscmd()
+{
+    cmd=$1
+    case $cmd in
+    */*)
+	if test -x $cmd -a ! -d $cmd ; then return 0; else return 1; fi ;;
+    *)
+      oldifs=$IFS; IFS=":"; set -- $PATH; IFS=$oldifs
+      for d in $*;do test -x $d/$cmd -a ! -d $d/$cmd && return 0;done
+      return 1 ;;
+    esac
+}
+
+checkcmds()
+{
+    for cmd in $*;do
+      if iscmd $cmd 
+      then 
+        a=1
+      else 
+        senderror HELPERNOTFOUND $cmd
+      fi
+    done
+}
+
+# show help message
+if test $# -ne 1 -o "$1" = "--help" 
+then
+  echo "Convert a $filetype file to HTML text for Recoll indexing."
+  echo "Usage: $progname [infile]"
+  exit 1
+fi
+
+infile="$1"
+
+# check the input file existence (may be '-' for stdin)
+if test "X$infile" != X- -a ! -f "$infile"
+then
+  senderror INPUTNOSUCHFILE "$infile"
+fi
+
+# protect access to our temp files and directories
+umask 77
+
+##############################################################################
+# !! Leave the following line unmodified !
+#ENDRECFILTCOMMONCODE
+
+checkcmds grep awk sed
+
+# A small sed program to join lines where they are broken inside an
+# attribute value. The idea is that all scribus tag are apparently on one
+# line except when there are embedded new lines in an attribute lie
+# 'comments'. The first version of the sed script joins line which does not
+# end with > with the next. It doesn't guard against an embedded '>'. The
+# seconf joins line not beginning with '<' with the previous. It is much
+# slower for some reason.
+sedjoinprog=':a
+/[^>] *$/N; s/\n/ /; ta'
+#sedjoinprog1=':a
+#$!N;/^ *[^<]/s/\n/ /;ta
+#P;D'
+
+# Extract description title author and keywords
+description=`sed -e "$sedjoinprog" < "$infile" | \
+awk '
+/<DOCUMENT / {
+    if (match($0, " COMMENTS=\"[^\"]+")) { 
+       s=substr($0, RSTART+11, RLENGTH-11)
+       printf("%s", s);
+       # Note: there is no way to know if this ends a frame, so no "<br>"
+    }
+}
+'`
+
+title=`sed -e "$sedjoinprog" < "$infile" | \
+awk '
+/<DOCUMENT / {
+    if (match($0, " TITLE=\"[^\"]+")) { 
+       s=substr($0, RSTART+8, RLENGTH-8)
+       printf("%s", s);
+       # Note: there is no way to know if this ends a frame, so no "<br>"
+    }
+}
+'`
+
+author=`sed -e "$sedjoinprog" < "$infile" | \
+awk '
+/<DOCUMENT / {
+    if (match($0, " AUTHOR=\"[^\"]+")) { 
+       s=substr($0, RSTART+9, RLENGTH-9)
+       printf("%s", s);
+       # Note: there is no way to know if this ends a frame, so no "<br>"
+    }
+}
+'`
+
+keywords=`sed -e "$sedjoinprog" < "$infile" | \
+awk '
+/<DOCUMENT / {
+    if (match($0, " KEYWORDS=\"[^\"]+")) { 
+       s=substr($0, RSTART+11, RLENGTH-11)
+       printf("%s", s);
+       # Note: there is no way to know if this ends a frame, so no "<br>"
+    }
+}
+'`
+
+#echo description: [$description];echo title: [$title];
+#echo author: [$author];echo keywords: [$keywords]
+
+cat <<EOF
+<html><head>
+<title>$title</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name="author" content="$author">
+<meta name="description" content="$description">
+<meta name="keywords" content="$keywords">
+</head>
+<body><p>
+EOF
+
+
+sed -e ':a' -e '/[^>] *$/N; s/\n/ /; ta' < "$infile" | \
+awk '
+/<ITEXT |<para|<trail PA/ {
+    if (match($0, " CH=\"[^\"]+")) { 
+       s=substr($0, RSTART+5, RLENGTH-5)
+       printf("%s", s)
+       # Note: No way to know if this ends a paragraph, so no "<br>"
+       #  but it might be good to have one in some instances
+    }
+    else if (match($0, "<para+")) {
+       printf("<br>")
+       # New paragraph so a <br>
+    }
+    else if (match($0, "<trail PARENT=\"+")) {
+       printf("<br>")
+       # End of something so a <br>
+    }
+}
+END {
+    print "</p></body></html>"
+}
+' | \
+sed -e 's/&#x5;/<br>/g' -e 's/&#x1c;/<br>/g' -e 's//<br>/g' -e 's//<br>/g' -e 's// /g'

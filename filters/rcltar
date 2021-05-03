@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+
+# Tar-file filter for Recoll
+# Thanks to Recoll user Martin Ziegler
+# This is a modified version of /usr/share/recoll/filters/rclzip
+# It works not only for tar-files, but automatically for gzipped and
+# bzipped tar-files at well.
+
+from __future__ import print_function
+
+import rclexecm
+
+try:
+    import tarfile
+except:
+    print("RECFILTERROR HELPERNOTFOUND python3:tarfile")
+    sys.exit(1);
+
+class TarExtractor:
+    def __init__(self, em):
+        self.currentindex = 0
+        self.em = em
+        self.namen = []
+
+    def extractone(self, ipath):
+        docdata = b''
+        try:
+            info = self.tar.getmember(ipath)
+            if info.size > self.em.maxmembersize:
+                # skip
+                docdata = b''
+                self.em.rclog("extractone: entry %s size %d too big" %
+                              (ipath, info.size))
+                docdata = b'' # raise TarError("Member too big")
+            else:
+                docdata = self.tar.extractfile(ipath).read()
+            ok = True
+        except Exception as err:
+            ok = False
+        iseof = rclexecm.RclExecM.noteof
+        if self.currentindex >= len(self.namen) -1:
+            iseof = rclexecm.RclExecM.eofnext
+        return (ok, docdata, rclexecm.makebytes(ipath), iseof)
+
+    def closefile(self):
+        self.tar = None
+
+    def openfile(self, params):
+        self.currentindex = -1
+        try:
+            self.tar = tarfile.open(name=params["filename"], mode='r')
+            #self.namen = [ y.name for y in filter(lambda z:z.isfile(),self.tar.getmembers())]
+            self.namen = [ y.name for y in [z for z in self.tar.getmembers() if z.isfile()]]
+
+            return True
+        except:
+            return False
+
+    def getipath(self, params):
+        ipath = params["ipath"]
+        ok, data, ipath, eof = self.extractone(ipath)
+        if ok:
+            return (ok, data, ipath, eof)
+        try:
+            ipath = ipath.decode("utf-8")
+            return self.extractone(ipath)
+        except Exception as err:
+            return (ok, data, ipath, eof)
+
+    def getnext(self, params):
+
+        if self.currentindex == -1:
+            # Return "self" doc
+            self.currentindex = 0
+            self.em.setmimetype('text/plain')
+            if len(self.namen) == 0:
+                self.closefile()
+                eof = rclexecm.RclExecM.eofnext
+            else:
+                eof = rclexecm.RclExecM.noteof
+            return (True, "", "", eof)
+
+        if self.currentindex >= len(self.namen):
+            self.namen=[]
+            self.closefile()
+            return (False, "", "", rclexecm.RclExecM.eofnow)
+        else:
+            ret = self.extractone(self.namen[self.currentindex])
+            self.currentindex += 1
+            if ret[3] == rclexecm.RclExecM.eofnext or \
+               ret[3] == rclexecm.RclExecM.eofnow:
+                self.closefile()
+            return ret
+
+
+proto = rclexecm.RclExecM()
+extract = TarExtractor(proto)
+rclexecm.main(proto, extract)

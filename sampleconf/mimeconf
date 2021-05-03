@@ -1,0 +1,528 @@
+# (C) 2004 J.F.Dockes
+
+# This file contains most of the data which determines how we
+# handle the different mime types (also see the "mimeview" file).
+# Sections:
+# top-level: Decompression parameters. Should not be at top-level, historical.
+# [index] : Associations of mime types to the filters that translate them
+#      to plain text or html.
+# [icons] : Associations of mime types to result list icons (GUI)
+# [categories] : groupings of mime types (media, text, message etc.)
+# [guifilters] : defines the filtering checkboxes in the GUI. Uses the
+#   above categories by default
+
+## #######################################
+# Decompression: these types need a first pass to create a temp file to
+# work with. We use a script because uncompress utilities usually work in
+# place, which is not suitable. 
+#
+# Obviously this should be in a [decompress] section or such, but it was
+# once forgotten and remained global for compatibility. The first word
+# 'uncompress' should have been the section name and has no other meaning.
+# 
+# The second word is the name of a script or program to execute to
+# produce an uncompressed copy (e.g.: rcluncomp). It must output the
+# uncompressed file name on stdout, and produce no data out of the
+# temporary directory given as parameter. The uncompressed file name should
+# preserve the original file extension (i.e. use gunzip myfile.doc.gz not
+# gunzip < myfile.doc.gz > myfile.whateverwrongextension)
+# 
+# The %t parameter will be substituted to the name of a temporary directory
+# by recoll. This directory is guaranteed empty when calling the filter.
+#
+# The %f parameter will be substituted with the input file. 
+#
+# Note that it should be possible to improve performance a lot by writing a
+# compressor-specific script instead of the generic rcluncomp which will
+# copy the compressed file into the temporary directory as a first step in
+# all cases.
+#
+application/gzip  =  uncompress rcluncomp gunzip %f %t
+application/x-bzip2 =  uncompress rcluncomp bunzip2 %f %t
+application/x-compress = uncompress rcluncomp gunzip %f %t
+application/x-gzip  =  uncompress rcluncomp gunzip %f %t
+application/x-lzma = uncompress rcluncomp unxz %f %t
+application/x-xz = uncompress rcluncomp unxz %f %t
+application/x-zstd = uncompress rcluncomp "unzstd --rm -q" %f %t
+
+## ###################################
+# Filters for indexing and internal preview. 
+# The "internal" filters are hardwired in the c++ code.
+# The external "exec" filters are typically scripts. By default, they output the
+# document in simple html format, have a look at the scripts.
+# A different format (ie text/plain), and a character set can be defined for
+# each filter, see the exemples below (ie: msword)
+[index]
+
+# MSWORD: the rcldoc script handles a number of marginal case that raw
+# antiword won't:
+#  - with wvWare: "text stream of this file is too small to handle" 
+#  - with unrtf: rtf files disguising as doc files.
+# The default is now again to use rcldoc. Use raw antiword if speed is more
+# important for you than catching all data, 
+application/msword = execm rcldoc.py
+#application/msword = exec antiword -t -i 1 -m UTF-8;mimetype=text/plain
+# You can also use wvware directly but it's much slower.
+# application/msword = exec wvWare --charset=utf-8 --nographics
+application/vnd.ms-excel = execm rclxls.py
+application/vnd.ms-outlook = execm rclpst.py
+application/vnd.ms-powerpoint = execm rclppt.py
+# Also Handle the mime type returned by "file -i" for a suffix-less word
+# file. This could probably just as well be an excel file, but we have to
+# chose one.
+application/vnd.ms-office = execm rcldoc.py
+
+application/vnd.oasis.opendocument.text = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.oasis.opendocument.text-template = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.oasis.opendocument.presentation = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.oasis.opendocument.spreadsheet = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.oasis.opendocument.graphics = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.oasis.opendocument.presentation-flat-xml = \
+ internal xsltproc opendoc-flat.xsl
+application/vnd.oasis.opendocument.text-flat-xml = \
+ internal xsltproc opendoc-flat.xsl
+application/vnd.oasis.opendocument.spreadsheet-flat-xml = \
+ internal xsltproc opendoc-flat.xsl
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document = \
+ internal xsltproc meta docProps/core.xml openxml-meta.xsl \
+ body word/document.xml openxml-word-body.xsl \
+ body word/footnotes.xml openxml-word-body.xsl \
+ body word/endnotes.xml openxml-word-body.xsl 
+application/vnd.openxmlformats-officedocument.wordprocessingml.template = \
+ internal xsltproc meta docProps/core.xml openxml-meta.xsl \
+ body word/document.xml openxml-word-body.xsl \
+ body word/footnotes.xml openxml-word-body.xsl \
+ body word/endnotes.xml openxml-word-body.xsl 
+application/vnd.openxmlformats-officedocument.presentationml.template = \
+ execm rclopxml.py
+application/vnd.openxmlformats-officedocument.presentationml.presentation = \
+ execm rclopxml.py
+application/vnd.ms-visio.drawing = execm rclopxml.py
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet = \
+ internal xsltproc meta docProps/core.xml openxml-meta.xsl \
+ body xl/sharedStrings.xml openxml-xls-body.xsl
+application/vnd.openxmlformats-officedocument.spreadsheetml.template =\
+ internal xsltproc meta docProps/core.xml openxml-meta.xsl \
+ body xl/sharedStrings.xml openxml-xls-body.xsl
+
+application/vnd.sun.xml.calc = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.calc.template = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.draw = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.draw.template = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.impress = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.impress.template = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.math = \
+  internal xsltproc meta meta.xml opendoc-meta.xsl \
+  body content.xml opendoc-body.xsl
+application/vnd.sun.xml.writer = \
+  internal xsltproc meta meta.xml opendoc-meta.xsl \
+  body content.xml opendoc-body.xsl
+application/vnd.sun.xml.writer.global = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+application/vnd.sun.xml.writer.template = \
+ internal xsltproc meta meta.xml opendoc-meta.xsl \
+ body content.xml opendoc-body.xsl
+
+#application/x-mobipocket-ebook = execm rclmobi
+#application/x-tar = execm rcltar
+
+application/epub+zip = execm rclepub
+application/javascript = internal text/plain
+application/ogg = execm rclaudio
+application/pdf = execm rclpdf.py
+application/postscript = exec rclps
+application/sql = internal text/plain
+application/vnd.wordperfect = exec wpd2html;mimetype=text/html
+application/x-7z-compressed = execm rcl7z
+application/x-abiword = internal xsltproc abiword.xsl
+application/x-awk = internal text/plain
+application/x-chm = execm rclchm
+application/x-dia-diagram = execm rcldia;mimetype=text/plain
+application/x-dvi = exec rcldvi
+application/x-flac = execm rclaudio
+application/x-gnote = execm rclxml.py
+application/x-gnuinfo = execm rclinfo
+application/x-gnumeric = internal xsltproc gnumeric.xsl
+application/x-hwp = execm rclhwp.py
+application/x-kword = exec rclkwd
+application/x-lyx = exec rcllyx
+application/x-mimehtml = internal message/rfc822
+application/x-okular-notes = internal xsltproc okular-note.xsl
+application/x-perl = internal text/plain
+application/x-php = internal text/plain
+application/x-rar = execm rclrar;charset=default
+application/x-ruby = internal text/plain
+application/x-scribus = exec rclscribus
+application/x-shellscript = internal text/plain
+application/x-tex = exec rcltex
+application/x-webarchive = execm rclwar
+application/x-zerosize = internal
+application/zip = execm rclzip;charset=default
+audio/aac = execm rclaudio
+audio/ape = execm rclaudio
+audio/mp4 = execm rclaudio
+audio/mpeg = execm rclaudio
+audio/ogg = execm rclaudio
+audio/x-karaoke = execm rclkar
+audio/x-musepack = execm rclaudio
+audio/x-wavpack = execm rclaudio
+image/gif = execm rclimg
+image/jp2 = execm rclimg
+image/jpeg = execm rclimg
+image/png = execm rclimg
+image/svg+xml = internal xsltproc svg.xsl
+image/tiff = execm rclimg
+image/vnd.djvu = execm rcldjvu.py
+image/x-nikon-nef = execm rclimg
+image/x-xcf = execm rclimg
+inode/symlink = internal
+inode/x-empty = internal application/x-zerosize
+message/rfc822 = internal
+text/calendar = execm rclics;mimetype=text/plain
+text/css = internal text/plain
+text/html  = internal 
+text/plain = internal 
+text/plain1 = internal 
+text/rtf = exec unrtf --nopict --html;mimetype=text/html
+text/x-bibtex = exec rclbibtex.sh ; mimetype = text/plain
+text/x-c = internal
+text/x-c+ = internal
+text/x-c++ = internal
+text/x-chm-html = internal text/html
+text/x-csharp = internal text/plain
+text/x-csv = internal text/plain
+text/x-fictionbook = internal xsltproc fb2.xsl
+text/x-gaim-log = exec rclgaim
+text/x-html-aptosid-man = exec rclaptosidman
+text/x-ini = internal text/plain
+text/x-java = internal text/plain
+text/x-lua = internal
+text/x-mail = internal
+text/x-man = exec rclman;maxseconds=30
+text/x-orgmode = execm rclorgmode.py
+text/x-perl = internal text/plain
+text/x-purple-html-log = internal text/html
+text/x-purple-log = exec rclpurple
+text/x-python = execm rclpython.py
+text/x-ruby = internal
+text/x-shellscript = internal text/plain
+text/x-srt = internal text/plain
+text/x-tex = exec rcltex
+video/mp4 = execm rclaudio
+video/x-msvideo = execm rclimg
+
+
+# Generic XML is best indexed as text, else it generates too many errors
+# All parameter and tag names, attribute values etc, are indexed as
+# text. rclxml.py tries to just index the text content.
+#application/xml = execm rclxml.py
+#text/xml = internal xsltproc xml.xsl
+application/xml = internal text/plain
+text/xml = internal text/plain
+
+
+## #############################################
+# Icons to be used in the result list if required by gui config
+[icons]
+application/epub+zip = book
+application/javascript = source
+application/javascript = source
+application/msword = wordprocessing
+application/ogg = sownd
+application/pdf = pdf
+application/postscript = postscript
+application/sql = source
+application/vnd.ms-excel = spreadsheet
+application/vnd.ms-office = document
+application/vnd.ms-outlook = document
+application/vnd.ms-powerpoint = presentation
+application/vnd.oasis.opendocument.presentation = presentation
+application/vnd.oasis.opendocument.spreadsheet = spreadsheet
+application/vnd.oasis.opendocument.text = wordprocessing
+application/vnd.oasis.opendocument.graphics = presentation
+application/vnd.oasis.opendocument.presentation-flat-xml = presentation
+application/vnd.oasis.opendocument.spreadsheet-flat-xml = spreadsheet
+application/vnd.oasis.opendocument.text-flat-xml = wordprocessing
+application/vnd.oasis.opendocument.text-template = wordprocessing
+application/vnd.openxmlformats-officedocument.presentationml.presentation = presentation
+application/vnd.openxmlformats-officedocument.presentationml.template = presentation
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet = spreadsheet
+application/vnd.openxmlformats-officedocument.spreadsheetml.template = spreadsheet
+application/vnd.openxmlformats-officedocument.wordprocessingml.document = wordprocessing
+application/vnd.openxmlformats-officedocument.wordprocessingml.template = wordprocessing
+application/vnd.ms-visio.drawing = document
+application/vnd.sun.xml.calc = spreadsheet
+application/vnd.sun.xml.calc.template = spreadsheet
+application/vnd.sun.xml.draw = drawing
+application/vnd.sun.xml.draw.template = drawing
+application/vnd.sun.xml.impress = presentation
+application/vnd.sun.xml.impress.template = presentation
+application/vnd.sun.xml.math  = wordprocessing
+application/vnd.sun.xml.writer = wordprocessing
+application/vnd.sun.xml.writer.global = wordprocessing
+application/vnd.sun.xml.writer.template = wordprocessing
+application/vnd.wordperfect = wordprocessing
+application/x-7z-compressed = archive
+application/x-abiword = wordprocessing
+application/x-awk = source
+application/x-chm = book
+application/x-dia-diagram = drawing
+application/x-dvi = document
+application/x-flac = sownd
+application/x-fsdirectory = folder
+application/x-gnote = document
+application/x-gnuinfo = book
+application/x-gnumeric = spreadsheet
+application/x-kword = wordprocessing
+application/x-lyx = wordprocessing
+application/x-mimehtml = message
+application/x-mobipocket-ebook = document
+application/x-okular-notes = document
+application/x-perl = source
+application/x-php = source
+application/x-rar = archive
+application/x-ruby = source
+application/x-scribus = document
+application/x-scribus = wordprocessing
+application/x-shellscript = source
+application/x-tar = archive
+application/x-tex = wordprocessing
+application/x-webarchive = archive
+application/xml = document
+application/zip = archive
+audio/aac = sownd
+audio/ape = sownd
+audio/mp4 = sownd
+audio/mpeg = sownd
+audio/ogg = sownd
+audio/x-karaoke = sownd
+audio/x-musepack = sownd
+audio/x-wavpack = sownd
+image/bmp = image
+image/gif = image
+image/jp2 = image
+image/jpeg = image
+image/png = image
+image/svg+xml = drawing
+image/tiff = image
+image/vnd.djvu = document
+image/x-nikon-nef = image
+image/x-xcf = image
+image/x-xpmi = image
+inode/directory = folder
+inode/symlink = emblem-symbolic-link
+message/rfc822 = message
+text/css = html
+text/html = html
+text/html|chm = bookchap
+text/html|epub = bookchap
+text/html|gnuinfo = bookchap
+text/plain = txt
+text/rtf = wordprocessing
+text/x-bibtex = txt
+text/x-c = source
+text/x-c+ = source
+text/x-c++ = source
+text/x-chm-html = html
+text/x-csharp = source
+text/x-csv = txt
+text/x-fictionbook = book
+text/x-html-aptosid-man = aptosid-book
+text/x-ini = txt
+text/x-java = source
+text/x-lua = source
+text/x-mail = message
+text/x-man = document
+text/x-perl = source
+text/x-php = source
+text/x-purple-html-log = pidgin
+text/x-purple-log = pidgin
+text/x-python = text-x-python
+text/x-ruby = source
+text/x-shellscript = source
+text/x-srt = source
+text/x-tex = wordprocessing
+text/xml = document
+video/3gpp = video
+video/mp2p = video
+video/mp2t = video
+video/mp4 = video
+video/mpeg = video
+video/quicktime = video
+video/x-matroska = video
+video/x-ms-asf = video
+video/x-msvideo = video
+
+[categories]
+# Categories group mime types by "kind". They can be used from the query
+# language as an "rclcat" clause. This is fully dynamic, you can change the
+# names and groups as you wish, only the mime types are stored in the index.
+#
+# If you add/remove categories, you may also want to change the
+# "guifilters" section below.
+text = \
+      application/epub+zip \
+      application/javascript \
+      application/msword \
+      application/pdf \
+      application/postscript \
+      application/sql \
+      application/vnd.oasis.opendocument.text \
+      application/vnd.oasis.opendocument.text-flat-xml \
+      application/vnd.oasis.opendocument.text-template \
+      application/vnd.openxmlformats-officedocument.wordprocessingml.document \
+      application/vnd.openxmlformats-officedocument.wordprocessingml.template \
+      application/vnd.sun.xml.writer \
+      application/vnd.sun.xml.writer.global \
+      application/vnd.sun.xml.writer.template \
+      application/vnd.wordperfect \
+      application/x-abiword \
+      application/vnd.ms-office \
+      application/x-awk \
+      application/x-chm \
+      application/x-dvi \
+      application/x-gnote \
+      application/x-gnuinfo \
+      application/x-kword \
+      application/x-lyx \
+      application/x-mobipocket-ebook \
+      application/x-okular-notes \
+      application/x-perl \
+      application/x-php \
+	  application/x-ruby \
+      application/x-scribus \
+      application/x-shellscript \
+      application/x-tex \
+      application/xml \
+      text/xml \
+      text/x-csv \
+      text/x-tex \
+      image/vnd.djvu \
+      text/calendar \
+      text/css \
+      text/html \
+      text/plain \
+      text/rtf \
+      text/x-bibtex \
+      text/x-c \
+      text/x-c++ \
+      text/x-c+ \
+      text/x-chm-html \
+      text/x-csharp \
+      text/x-lua \
+      text/x-fictionbook \
+      text/x-html-aptosid-man \
+      text/x-html-sidux-man \
+      text/x-ini \
+      text/x-java \
+      text/x-man \
+      text/x-perl \
+      text/x-php \
+      text/x-python \
+	  text/x-ruby \
+      text/x-shellscript \
+      text/x-srt
+
+spreadsheet = \
+   application/vnd.ms-excel \
+   application/vnd.oasis.opendocument.spreadsheet \
+   application/vnd.oasis.opendocument.spreadsheet-flat-xml \
+   application/vnd.openxmlformats-officedocument.spreadsheetml.sheet \
+   application/vnd.openxmlformats-officedocument.spreadsheetml.template \
+   application/vnd.sun.xml.calc \
+   application/vnd.sun.xml.calc.template \
+   application/x-gnumeric \
+
+presentation = \
+  application/vnd.ms-powerpoint \
+  application/vnd.oasis.opendocument.graphics \
+  application/vnd.oasis.opendocument.presentation \
+  application/vnd.oasis.opendocument.presentation-flat-xml \
+  application/vnd.openxmlformats-officedocument.presentationml.presentation \
+  application/vnd.openxmlformats-officedocument.presentationml.template \
+  application/vnd.sun.xml.impress \
+  application/vnd.sun.xml.impress.template \
+  application/vnd.ms-visio.drawing
+
+media = \
+      application/ogg \
+      application/x-flac \
+      audio/* \
+      image/* \
+      video/* \
+
+message = \
+        message/rfc822 \
+        text/x-gaim-log \
+        text/x-mail \
+        text/x-purple-html-log \
+        text/x-purple-log \
+
+other = \
+        application/vnd.ms-outlook \
+        application/vnd.sun.xml.draw \
+        application/vnd.sun.xml.draw.template \
+        application/vnd.sun.xml.math \
+        application/x-7z-compressed \
+        application/x-dia-diagram \
+        application/x-fsdirectory \
+        application/x-mimehtml \
+        application/x-rar \
+        application/x-tar \
+        application/x-webarchive \
+        application/x-zerosize \
+        application/zip \
+        inode/directory \
+        inode/symlink \
+        inode/x-empty \
+
+[guifilters]
+# This defines the top level filters in the GUI (accessed by the the
+# radiobuttons above the results area, or a toolbar combobox).
+# Each entry defines a label and a query language fragment that will be
+# applied to filter the current query if the option is activated.
+#
+# This does not really belong in mimeconf, but it does belong in the index
+# config (not the GUI one), because it's not necessarily the same in all
+# configs, it has to go somewhere, and it's not worth a separate config
+# file...
+#
+# By default this filters by document category (see above), but any
+# language fragment should be ok. Be aware though that the "document
+# history" queries only know about simple "rclcat" filtering.
+#
+# If you don't want the filter names to be displayed in alphabetic order,
+# you can define them with a colon. The part before the colon is not
+# displayed but used for ordering, ie: a:zzbutshouldbefirst b:aacomeslast
+#
+text = rclcat:text
+spreadsheet = rclcat:spreadsheet
+presentation = rclcat:presentation
+media = rclcat:media
+message = rclcat:message
+other = rclcat:other
+

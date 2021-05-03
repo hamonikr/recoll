@@ -1,0 +1,79 @@
+/* 
+ Embryonic dark mode
+
+ If you do want to use and improve it, and encounter a difficulty due to
+ (lack of) widget object names or whatever, please get in touch, I'll fix
+ what needs to be.
+
+ You can have a look at http://doc.qt.io/qt-5/stylesheet-syntax.html 
+ for Qt style sheet information.
+
+ Select the file from the GUI with:
+   Preferences->GUI configuration->User interface->Style sheet->Choose
+
+ You will also need to change the HTML style which controls the
+ result list:
+   Preferences->GUI configuration->Result list->
+                 Edit result page html header insert
+ See recoll-dark.css in src/sampleconf of share/examples
+*/
+
+/* Light on dark text everywhere*/
+* {
+    background-color: #373737;
+    color: #ffffff;
+    selection-background-color: #424e72;
+    selection-color: #ffffff;
+}
+
+QTableView {
+    alternate-background-color: #474747;
+    background-color: #373737;
+}
+QHeaderView::section {
+    background-color: #373737;
+}
+
+QToolTip {
+    background-color: yellow;
+    color: black;
+}
+
+QMenuBar::item:selected {
+    background: #424e72;
+}
+
+/* I have used the colour values that were in QTabWidget QTabBar::tab for
+ * QTabWidget QTabBar::tab:selected, and vice-versa. Also, though, I have
+ * brightened the whites.*/
+QTabWidget QTabBar::tab {
+    background: #5f5f5f;
+    color:      #ffffff;
+}
+        
+QTabWidget QTabBar::tab:selected {
+    background: #2f4f4f;
+    color:      #ffffff;
+}
+
+/* Slightly *darker* background for text entry areas. */
+QComboBox[editable="true"], QTextEdit[editable="true"], QLineEdit,
+QPlainTextEdit {
+    background-color: #101010;
+    color: #ffffff;
+}
+
+QPushButton:!enabled {
+    background-color: #505050;
+}
+QToolButton:on {
+    background-color: #505050;
+}
+
+/* Did not find a way to set the background on the indicator/icon part */
+QMenu::item:checked {
+    background: #505050;
+}
+QMenu::item:!enabled {
+    color: #808080;
+}

@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Recoll Search</title>
+</head>
+<body>
+
+  <h3>Recoll search</h3>
+
+  <p>
+    <form method="get" action="recoll://search/query">
+      Query type:<br>
+      <input type="radio" name="qtp" value="l" checked>Query language<br>
+      <input type="radio" name="qtp" value="a">All terms<br>
+      <input type="radio" name="qtp" value="o">Any term<br>
+      <input type="radio" name="qtp" value="f">File name<br>
+
+      <input type="hidden" name="p" value="0">
+      Enter search string: <input type="text" name="q" size="40" value="%Q">
+      <input type="submit" value="Search">
+
+      <!-- This resets to the preset value. We'd like a real clear
+       <input type="reset" value="Clear"> -->
+
+    </form>
+</p>
+
+</body>
+</html>

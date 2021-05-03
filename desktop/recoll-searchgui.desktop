@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Qt;Utility;Filesystem;Database;
+Comment=Find documents by specifying search terms
+Comment[ru]=Поиск документов по заданным условиям
+Comment[de]=Finde Dokumente durch Angeben von Suchbegriffen
+Exec=recoll
+GenericName=Local Text Search
+GenericName[ru]=Локальный текстовый поиск
+GenericName[de]=Lokale Textsuche
+Icon=recoll
+Name=Recoll
+Terminal=false
+Type=Application
+Keywords=Search;Full Text;

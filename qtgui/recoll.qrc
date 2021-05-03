@@ -1,0 +1,21 @@
+<!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+  <file>images/asearch.png</file>
+  <file>images/cancel.png</file>
+  <file>images/close.png</file>
+  <file>images/code-block.png</file>
+  <file>images/history.png</file>
+  <file>images/nextpage.png</file>
+  <file>images/prevpage.png</file>
+  <file>images/firstpage.png</file>
+  <file>images/sortparms.png</file>
+  <file>images/spell.png</file>
+  <file>images/table.png</file>
+  <file>images/up.png</file>
+  <file>images/down.png</file>
+  <file>images/recoll.png</file>
+  <file>images/interro.png</file>
+  <file>images/clock.png</file>
+  <file>images/menu.png</file>
+ </qresource>
+</RCC>

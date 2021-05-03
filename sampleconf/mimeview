@@ -1,0 +1,243 @@
+# @(#$Id: mimeview,v 1.16 2008-09-15 08:03:37 dockes Exp $  (C) 2004 J.F.Dockes
+
+## ##########################################
+# External viewers, launched by the recoll GUI when you click on a result
+# 'edit' link
+
+# Mime types which we should not uncompress if they are found gzipped or
+# bzipped because the native viewer knows how to handle. These would be
+# exceptions and the list is normally empty
+#nouncompforviewmts = 
+
+# For releases 1.18 and later: exceptions when using the x-all entry: these
+# types will use their local definition. This is useful, e.g.: 
+#
+#  - for pdf, where we can pass additional parameters like page to open and
+#    search string
+#  - For pages of CHM and EPUB documents where we can choose to open the 
+#    parent document instead of a temporary html file.
+# Use xallexcepts- and xallexcepts+ in a user file to add or remove from
+# the default xallexcepts list
+
+# Visio xml is in there because the desktops tend to try and open it as an
+# archive
+xallexcepts = application/pdf application/postscript application/x-dvi \
+ text/html|gnuinfo text/html|chm text/html|epub text/html|rclman \
+ application/x-fsdirectory|parentopen inode/directory|parentopen \
+ application/vnd.ms-visio.drawing
+
+
+[view]
+# Pseudo entry used if the 'use desktop' preference is set in the GUI.
+# Note that we use %U to url-encode the parameter
+application/x-all = xdg-open %U
+# But do use the uncoded url for help (F1) because the fragment in there must
+# actually be processed.
+text/html|rclman = xdg-open %u
+
+application/epub+zip = ebook-viewer %f
+# Open the parent epub document for epub parts instead of opening them as
+# html documents. This is almost always what we want.
+text/html|epub = ebook-viewer %F;ignoreipath=1
+
+application/x-gnote = gnote %f
+
+application/x-mobipocket-ebook = ebook-viewer %f
+
+application/x-kword = kword %f
+application/x-abiword = abiword %f
+application/x-hwp = libreoffice
+
+# Note: the Linux Mint evince clones, atril and xread, have the same options
+application/pdf  = evince --page-index=%p --find=%s %f
+# Or:
+#application/pdf  = qpdfview --search %s %f#%p
+
+application/postscript = evince --page-index=%p --find=%s %f
+application/x-dvi = evince --page-index=%p --find=%s  %f
+
+application/x-lyx = lyx %f
+application/x-scribus = scribus %f
+
+application/msword = libreoffice %f
+application/vnd.ms-excel = libreoffice %f
+application/vnd.ms-powerpoint = libreoffice %f
+
+application/vnd.oasis.opendocument.text = libreoffice %f
+application/vnd.oasis.opendocument.presentation = libreoffice %f
+application/vnd.oasis.opendocument.spreadsheet = libreoffice %f
+application/vnd.oasis.opendocument.graphics = libreoffice %f
+application/vnd.oasis.opendocument.presentation-flat-xml = libreoffice %f
+application/vnd.oasis.opendocument.spreadsheet-flat-xml = libreoffice %f
+application/vnd.oasis.opendocument.text-flat-xml = libreoffice %f
+application/vnd.oasis.opendocument.text-template = libreoffice %f
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document = \
+ libreoffice %f
+application/vnd.openxmlformats-officedocument.wordprocessingml.template = \
+ libreoffice %f
+application/vnd.openxmlformats-officedocument.presentationml.template = \
+ libreoffice %f
+application/vnd.ms-visio.drawing = libreoffice %f
+application/vnd.openxmlformats-officedocument.presentationml.presentation = \
+ libreoffice %f
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet = \
+ libreoffice %f
+application/vnd.openxmlformats-officedocument.spreadsheetml.template =\
+ libreoffice %f
+application/vnd.sun.xml.calc = libreoffice %f
+application/vnd.sun.xml.calc.template = libreoffice %f
+application/vnd.sun.xml.draw = libreoffice %f
+application/vnd.sun.xml.draw.template = libreoffice %f
+application/vnd.sun.xml.impress = libreoffice %f
+application/vnd.sun.xml.impress.template = libreoffice %f
+application/vnd.sun.xml.math = libreoffice %f
+application/vnd.sun.xml.writer = libreoffice %f
+application/vnd.sun.xml.writer.global = libreoffice %f
+application/vnd.sun.xml.writer.template = libreoffice %f
+application/vnd.wordperfect = libreoffice %f
+text/rtf = libreoffice %f
+
+application/x-dia-diagram = dia %f
+
+application/x-fsdirectory = dolphin %f
+inode/directory = dolphin %f
+
+# Both dolphin and nautilus can pre-select a file inside a
+# directory. Thunar can't afaik. xdg-open cant pass an additional
+# parameters so these are to be xallexcepts.
+application/x-fsdirectory|parentopen = dolphin --select %(childurl) %f
+inode/directory|parentopen = dolphin --select %(childurl) %f
+#application/x-fsdirectory|parentopen = nautilus %(childurl)
+#inode/directory|parentopen = nautilus %(childurl)
+
+application/x-gnuinfo = xterm -e "info -f %f"
+application/x-gnumeric = gnumeric %f
+
+application/x-flac = rhythmbox %f
+audio/mpeg = rhythmbox %f
+audio/aac = rhythmbox %f
+audio/ape = rhythmbox %f
+audio/mp4 = rhythmbox %f
+audio/ogg = rhythmbox %f
+audio/x-musepack = rhythmbox %f
+audio/x-wavpack = rhythmbox %f
+application/ogg = rhythmbox %f
+
+audio/x-karaoke = kmid %f
+
+image/jpeg = ristretto %f
+image/jp2 = ristretto %f
+image/png = ristretto %f
+image/tiff = ristretto %f
+image/gif  = ristretto %f
+image/vnd.djvu = djview %f
+image/bmp = ristretto %f
+image/x-ms-bmp = ristretto %f
+image/x-xpmi = ristretto %f
+
+image/x-xcf = gimp %f
+image/x-nikon-nef = ufraw %f
+image/svg+xml = inkview %f
+
+# Opening mail messages:
+#  - Thunderbird will only open a single-message file if it has an .eml
+#    extension
+#  - "sylpheed %f" seems to work ok as of version 3.3
+#  - "kmail --view %u" works
+#  - claws-mail: works using a small intermediary shell-script, which you
+#    set as the viewer here. You need to have at least one account inside
+#    claws-mail, so that it creates ~/Mail/inbox. Script contents example
+#    follows. Using 1 is probably not a good idea if this is a real account
+#    (here I am using a bogus one, so that I can overwrite anything inside
+#    inbox at will):
+#          #!/bin/bash
+#          cp $1 ~/Mail/inbox/1
+#          claws-mail --select ~/Mail/inbox/1
+#          rm ~/Mail/inbox/1
+message/rfc822 = thunderbird -file %f
+
+text/x-mail = thunderbird -file %f
+application/x-mimehtml = thunderbird -file %f
+
+text/calendar = evolution %f
+
+application/x-okular-notes = okular %f
+
+application/x-rar = ark %f
+application/x-tar = ark %f
+application/zip = ark %f
+application/x-7z-compressed = ark %f
+
+application/javascript = emacsclient --no-wait %f
+application/x-awk = emacsclient --no-wait %f
+application/x-bibtex = emacsclient --no-wait %f
+application/x-csharp = emacsclient --no-wait %f
+application/x-java = emacsclient --no-wait %f
+application/x-perl = emacsclient --no-wait %f
+application/x-php = emacsclient --no-wait %f
+application/x-ruby = emacsclient --no-wait %f 
+application/x-shellscript = emacsclient --no-wait %f
+text/x-bibtex = emacsclient --no-wait %f
+text/css = emacsclient --no-wait %f
+text/x-csharp = emacsclient --no-wait %f
+text/x-java = emacsclient --no-wait %f
+text/x-perl = emacsclient --no-wait %f
+text/x-ruby = emacsclient --no-wait %f 
+text/x-shellscript = emacsclient --no-wait %f
+text/x-srt = emacsclient --no-wait %f
+
+# Or firefox -remote "openFile(%u)"
+text/html = firefox %u
+application/x-chm-html = %u
+text/x-chm-html = %u
+
+# gnu info nodes are translated to html with a "gnuinfo"
+# rclaptg. rclshowinfo knows how to start the info command on the right
+# node
+text/html|gnuinfo = rclshowinfo %F %(title);ignoreipath=1
+
+application/x-webarchive = konqueror %f
+text/x-fictionbook = ebook-viewer %f
+
+application/x-javascript = emacsclient --no-wait  %f
+application/sql = emacsclient --no-wait  %f
+application/x-tex = emacsclient --no-wait  %f
+application/xml = emacsclient --no-wait  %f
+text/xml = emacsclient --no-wait  %f
+text/x-tex = emacsclient --no-wait  %f
+text/plain = emacsclient --no-wait  %f
+text/x-awk = emacsclient --no-wait  %f
+text/x-c = emacsclient --no-wait  %f
+text/x-lua = emacsclient --no-wait  %f
+text/x-c+ = emacsclient --no-wait  %f
+text/x-c++ = emacsclient --no-wait  %f
+text/x-csv = libreoffice %f
+text/x-html-sidux-man = konqueror %f
+text/x-html-aptosid-man = iceweasel %f
+
+application/x-chm = kchmviewer %f
+# Html pages inside a chm have a chm rclaptg set by the filter. Kchmviewer
+# knows how to use the ipath (which is the internal chm path) to open the
+# file at the right place
+text/html|chm = kchmviewer --url %i %F
+
+text/x-ini = emacsclient --no-wait %f
+text/x-man = xterm -u8 -e "groff -T ascii -man %f | more"
+text/x-python = idle %f
+text/x-gaim-log = emacsclient --no-wait  %f
+text/x-purple-html-log = emacsclient --no-wait  %f
+text/x-purple-log = emacsclient --no-wait  %f
+
+# The video types will usually be handled by the desktop default, but they
+# need entries here to get an "Open" link
+video/3gpp = vlc %f
+video/mp2p = vlc %f
+video/mp2t = vlc %f
+video/mp4 = vlc %f
+video/mpeg = vlc %f
+video/quicktime = vlc %f
+video/x-matroska = vlc %f
+video/x-ms-asf = vlc %f
+video/x-msvideo = vlc %f
+

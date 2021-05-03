@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RclMainBase</class>
+ <widget class="QMainWindow" name="RclMainBase">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Recoll</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>4</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="SSearch" name="sSearch" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="ResList" name="reslist" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>2</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="MenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <addaction name="separator"/>
+  </widget>
+  <action name="fileExitAction">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileExitAction</cstring>
+   </property>
+  </action>
+  <action name="fileToggleIndexingAction">
+   <property name="text">
+    <string>Update &amp;index</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileToggleIndexingAction</cstring>
+   </property>
+  </action>
+  <action name="fileBumpIndexingAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Trigger incremental pass</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileBumpIndexingAction</cstring>
+   </property>
+  </action>
+  <action name="fileRebuildIndexAction">
+   <property name="text">
+    <string>&amp;Rebuild index</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileRebuildIndexAction</cstring>
+   </property>
+  </action>
+  <action name="fileEraseDocHistoryAction">
+   <property name="text">
+    <string>&amp;Erase document history</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileEraseDocHistoryAction</cstring>
+   </property>
+  </action>
+  <action name="fileEraseSearchHistoryAction">
+   <property name="text">
+    <string>&amp;Erase search history</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileEraseSearchHistoryAction</cstring>
+   </property>
+  </action>
+  <action name="fileExportSSearchHistoryAction">
+   <property name="text">
+    <string>E&amp;xport simple search history</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileExportSSearchHistoryAction</cstring>
+   </property>
+  </action>
+  <action name="showMissingHelpers_Action">
+   <property name="text">
+    <string>Missing &amp;helpers</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>showMissingHelpers_Action</cstring>
+   </property>
+  </action>
+  <action name="showActiveTypes_Action">
+   <property name="text">
+    <string>Indexed &amp;MIME types</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>showActiveTypes_Action</cstring>
+   </property>
+  </action>
+  <action name="helpAbout_RecollAction">
+   <property name="text">
+    <string>&amp;About Recoll</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>helpAbout_RecollAction</cstring>
+   </property>
+  </action>
+  <action name="userManualAction">
+   <property name="text">
+    <string>&amp;User manual</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>userManualAction</cstring>
+   </property>
+  </action>
+  <action name="toolsDoc_HistoryAction">
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/history.png</normaloff>:/images/history.png</iconset>
+   </property>
+   <property name="text">
+    <string>Document &amp;History</string>
+   </property>
+   <property name="toolTip">
+    <string>Document  History</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>toolsDoc_HistoryAction</cstring>
+   </property>
+  </action>
+  <action name="toolsAdvanced_SearchAction">
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/asearch.png</normaloff>:/images/asearch.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Advanced Search</string>
+   </property>
+   <property name="toolTip">
+    <string>Advanced/complex  Search</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>toolsAdvanced_SearchAction</cstring>
+   </property>
+  </action>
+  <action name="toolsSort_parametersAction">
+   <property name="text">
+    <string>&amp;Sort parameters</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort parameters</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>toolsSort_parametersAction</cstring>
+   </property>
+  </action>
+  <action name="toolsSpellAction">
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/spell.png</normaloff>:/images/spell.png</iconset>
+   </property>
+   <property name="text">
+    <string>Term &amp;explorer</string>
+   </property>
+   <property name="toolTip">
+    <string>Term explorer tool</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>toolsSpellAction</cstring>
+   </property>
+  </action>
+  <action name="nextPageAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/nextpage.png</normaloff>:/images/nextpage.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>Next page</string>
+   </property>
+   <property name="toolTip">
+    <string>Next page of results</string>
+   </property>
+   <property name="shortcut">
+    <string>PgDown</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>nextPageAction</cstring>
+   </property>
+  </action>
+  <action name="firstPageAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/firstpage.png</normaloff>:/images/firstpage.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>First page</string>
+   </property>
+   <property name="toolTip">
+    <string>Go to first page of results</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+PgUp</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>firstPageAction</cstring>
+   </property>
+  </action>
+  <action name="prevPageAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/prevpage.png</normaloff>:/images/prevpage.png</iconset>
+   </property>
+   <property name="iconText">
+    <string>Previous page</string>
+   </property>
+   <property name="toolTip">
+    <string>Previous page of results</string>
+   </property>
+   <property name="shortcut">
+    <string>PgUp</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>prevPageAction</cstring>
+   </property>
+  </action>
+  <action name="indexConfigAction">
+   <property name="text">
+    <string>&amp;Index configuration</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>indexConfigAction</cstring>
+   </property>
+  </action>
+  <action name="indexScheduleAction">
+   <property name="text">
+    <string>Indexing &amp;schedule</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>indexScheduleAction</cstring>
+   </property>
+  </action>
+  <action name="queryPrefsAction">
+   <property name="text">
+    <string>&amp;GUI configuration</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>queryPrefsAction</cstring>
+   </property>
+  </action>
+  <action name="extIdxAction">
+   <property name="text">
+    <string>E&amp;xternal index dialog</string>
+   </property>
+   <property name="iconText">
+    <string>External index dialog</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>extIdxAction</cstring>
+   </property>
+  </action>
+  <action name="enbSynAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enable synonyms</string>
+   </property>
+   <property name="iconText">
+    <string>Enable synonyms</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>enbSynAction</cstring>
+   </property>
+  </action>
+  <action name="toggleFullScreenAction">
+   <property name="text">
+    <string>&amp;Full Screen</string>
+   </property>
+   <property name="iconText">
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>toggleFullScreenAction</cstring>
+   </property>
+  </action>
+  <action name="zoomInAction">
+   <property name="text">
+    <string>Increase results text font size</string>
+   </property>
+   <property name="iconText">
+    <string>Increase Font Size</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>zoomInAction</cstring>
+   </property>
+  </action>
+  <action name="zoomOutAction">
+   <property name="text">
+    <string>Decrease results text font size</string>
+   </property>
+   <property name="iconText">
+    <string>Decrease Font Size</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>zoomOutAction</cstring>
+   </property>
+  </action>
+  <action name="actionSortByDateAsc">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/up.png</normaloff>:/images/up.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sort by date, oldest first</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort by dates from oldest to newest</string>
+   </property>
+  </action>
+  <action name="actionSortByDateDesc">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/down.png</normaloff>:/images/down.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sort by date, newest first</string>
+   </property>
+   <property name="toolTip">
+    <string>Sort by dates from newest to oldest</string>
+   </property>
+  </action>
+  <action name="actionShowQueryDetails">
+   <property name="text">
+    <string>Show Query Details</string>
+   </property>
+  </action>
+  <action name="actionShowResultsAsTable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/table.png</normaloff>:/images/table.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show as table</string>
+   </property>
+   <property name="toolTip">
+    <string>Show results in a spreadsheet-like table</string>
+   </property>
+  </action>
+  <action name="actionSaveResultsAsCSV">
+   <property name="text">
+    <string>Save as CSV (spreadsheet) file</string>
+   </property>
+   <property name="toolTip">
+    <string>Saves the result into a file which you can load in a spreadsheet</string>
+   </property>
+  </action>
+  <action name="actionNext_Page">
+   <property name="text">
+    <string>Next Page</string>
+   </property>
+  </action>
+  <action name="actionPrevious_Page">
+   <property name="text">
+    <string>Previous Page</string>
+   </property>
+  </action>
+  <action name="actionFirst_Page">
+   <property name="text">
+    <string>First Page</string>
+   </property>
+  </action>
+  <action name="actionQuery_Fragments">
+   <property name="icon">
+    <iconset resource="recoll.qrc">
+     <normaloff>:/images/code-block.png</normaloff>:/images/code-block.png</iconset>
+   </property>
+   <property name="text">
+    <string>Query Fragments</string>
+   </property>
+  </action>
+  <action name="fileRetryFailedAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>    With failed files retrying</string>
+   </property>
+   <property name="toolTip">
+    <string>Next update will retry previously failed files</string>
+   </property>
+   <property name="name" stdset="0">
+    <cstring>fileToggleIndexingAction</cstring>
+   </property>
+  </action>
+  <action name="actionSave_last_query">
+   <property name="text">
+    <string>Save last query</string>
+   </property>
+  </action>
+  <action name="actionLoad_saved_query">
+   <property name="text">
+    <string>Load saved query</string>
+   </property>
+  </action>
+  <action name="actionSpecial_Indexing">
+   <property name="text">
+    <string>Special Indexing</string>
+   </property>
+   <property name="toolTip">
+    <string>Indexing with special options</string>
+   </property>
+  </action>
+  <action name="actionShow_index_statistics">
+   <property name="text">
+    <string>Index &amp;statistics</string>
+   </property>
+  </action>
+  <action name="actionWebcache_Editor">
+   <property name="text">
+    <string>Webcache Editor</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="2" margin="2"/>
+ <customwidgets>
+  <customwidget>
+   <class>SSearch</class>
+   <extends>QWidget</extends>
+   <header>ssearch_w.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ResList</class>
+   <extends>QWidget</extends>
+   <header>reslist.h</header>
+  </customwidget>
+ </customwidgets>
+ <includes>
+  <include location="local">ssearch_w.h</include>
+  <include location="local">reslist.h</include>
+ </includes>
+ <resources>
+  <include location="recoll.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,355 @@
+.\" $Id: recollindex.1,v 1.7 2008-09-05 10:25:54 dockes Exp $ (C) 2005 J.F.Dockes\$
+.TH RECOLLINDEX 1 "8 January 2006"
+.SH NAME
+recollindex \- indexing command for the Recoll full text search system
+.SH SYNOPSIS
+.B recollindex \-h
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+[
+.B \-z|\-Z
+]
+[
+.B \-k
+]
+[
+.B \--diagsfile
+<diagpath> ]
+.br
+.B recollindex
+[
+.B \-c
+<cfd>]
+.B \-m
+[
+.B \-w
+<secs>]
+[
+.B \-D
+]
+[
+.B \-x
+]
+[
+.B \-C
+]
+[
+.B \-n|-k
+]
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \-i
+[
+.B \-Z \-k \-f \-P
+]
+[<path [path ...]>]
+.br
+.B recollindex 
+[
+.B \-c
+<cfdir>]
+.B \-r
+[
+.B \-Z \-K \-e \-f
+]
+[
+.B \-p 
+pattern
+]
+<dirpath>
+.br
+.B recollindex 
+[
+.B \-c
+<cfdir>]
+.B \-e 
+[<path [path ...]>]
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \-l|-S|-E
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \-s 
+<lang>
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \--webcache-compact
+.br
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \--webcache-burst
+<destdir>
+.B recollindex
+[
+.B \-c
+<cfdir>]
+.B \--notindexed
+[path [path ...]]
+
+.SH DESCRIPTION
+The
+.B recollindex
+command is the Recoll indexer.
+.PP
+As indexing can sometimes take a long time, the command can be interrupted
+by sending an interrupt (Ctrl-C, SIGINT) or terminate (SIGTERM)
+signal. Some time may elapse before the process exits, because it needs to
+properly flush and close the index. This can also be done from the recoll
+GUI (menu entry: File/Stop_Indexing). After such an interruption, the index
+will be somewhat inconsistent because some operations which are normally
+performed at the end of the indexing pass will have been skipped (for
+example, the stemming and spelling databases will be inexistent or out of
+date). You just need to restart indexing at a later time to restore
+consistency. The indexing will restart at the interruption point (the full
+file tree will be traversed, but files that were indexed up to the
+interruption and for which the index is still up to date will not need to
+be reindexed).
+.PP
+The 
+.B \-c 
+option specifies the configuration directory name, overriding the
+default or $RECOLL_CONFDIR.
+.PP
+There are several modes of operation. 
+.PP
+The normal mode will index the set of files described in the configuration
+file 
+.B recoll.conf.
+This will incrementally update the database with files that changed since
+the last run. If option 
+.B \-z 
+is given, the database will be erased before starting. If option
+.B \-Z 
+is given, the database will not be reset, but all files will be considered
+as needing reindexing (in place reset).
+.PP
+As of version 1.21, 
+.B recollindex
+usually does not process again files which previously failed to index (for
+example because of a missing helper program). If option
+.B \-k
+is given, 
+.B recollindex
+will try again to process all failed files. Please note that 
+.B recollindex
+may also decide to retry failed files if the auxiliary checking script
+defined by the "checkneedretryindexscript" configuration variable indicates
+that this should happen.
+.PP
+If option
+.B \--diagsfile
+is given, the path given as parameter will be truncated and indexing
+diagnostics will be written to it. Each line in the file will have a
+diagnostic type (reason for the file not to be indexed), the file path, and
+a possible additional piece of information, which can be the MIME type or
+the archive internal path depending on the issue. The following diagnostic
+types are currently defined:
+.IP
+.B Skipped
+: the path matches an element of
+.B skippedPaths or
+.B skippedNames.
+.IP
+.B NoContentSuffix
+: the file name suffix is found in the
+.B noContentSuffixes
+list.
+.IP
+.B MissingHelper
+: a helper program is missing.
+.IP
+.B Error
+: general error (see the log).
+.IP
+.B NoHandler: no handler is defined for the MIME type.
+.IP
+.B ExcludedMime
+: the MIME type is part of the
+.B excludedmimetypes
+list.
+.IP
+.B NotIncludedMime
+: the
+.B onlymimetypes
+list is not empty and the the MIME type is not in it.
+.PP
+If option 
+.B
+\-m 
+is given, recollindex is started for real time monitoring, using the
+file system monitoring package it was configured for (either fam, gamin, or
+inotify). This mode must have been explicitly configured when building the
+package, it is not available by default. The program will normally detach
+from the controlling terminal and become a daemon. If option
+.B
+\-D 
+is given, it will stay in the foreground. Option
+.B
+\-w 
+<seconds> can be used to specify that the program should sleep for the
+specified time before indexing begins. The default value is 60. The daemon
+normally monitors the X11 session and exits when it is reset.
+Option 
+.B
+\-x
+disables this X11 session monitoring (daemon will stay alive even if it
+cannot connect to the X11 server). You need to use this too if you use the
+daemon without an X11 context. You can use option
+.B
+\-n
+to skip the initial incrementing pass which is normally performed before
+monitoring starts. Once monitoring is started, the daemon normally monitors
+the configuration and restarts from scratch if a change is made. You can
+disable this with option
+.B
+\-C
+.PP
+.B recollindex \-i
+will index individual files into the database. The stem expansion and
+aspell databases will not be updated. The skippedPaths and skippedNames
+configuration variables will be used, so that some files may be
+skipped. You can tell recollindex to ignore skippedPaths and skippedNames
+by setting the 
+.B
+\-f option. This allows fully custom file selection for a given subtree,
+for which you would add the top directory to skippedPaths, and use any
+custom tool to generate the file list (ie: a tool from a source code
+control system). When run this way, the indexer normally does not perform
+the deleted files purge pass, because it cannot be sure to have seen all
+the existing files. You can force a purge pass with
+.B
+\-P.
+.PP
+.B recollindex \-e
+will erase data for individual files from the database. The stem expansion
+databases will not be updated.
+.PP
+Options
+.B
+\-i
+and
+.B
+\-e
+can be combined. This will first perform the purge, then the indexing.
+.PP
+With options 
+.B \-i 
+or 
+.B \-e 
+, if no file names are given on the command line, they
+will be read from stdin, so that you could for example run:
+.PP
+find /path/to/dir \-print | recollindex \-e \-i
+.PP
+to force the reindexing of a directory tree (which has to exist inside the
+file system area defined by
+.I topdirs 
+in recoll.conf). You could mostly accomplish the same thing with
+.PP
+find /path/to/dir \-print | recollindex \-Z \-i
+.PP
+The latter will perform a less thorough job of purging stale sub-documents
+though.
+.PP
+.B recollindex \-r
+mostly works like 
+.B \-i
+, but the parameter is a single directory, which will
+be recursively updated. This mostly does nothing more than 
+.B find topdir | recollindex \-i
+but it may be more convenient to use when started from another
+program. This retries failed files by default, use option
+.B \-K
+to change. One or multiple 
+.B \-p
+options can be used to set shell-type selection patterns (e.g.: *.pdf).
+.PP
+.B recollindex \-l 
+will list the names of available language stemmers.
+.PP
+.B recollindex \-s 
+will build the stem expansion database for a given language, which may or
+may not be part of the list in the configuration file. If the language is
+not part of the configuration, the stem expansion database will be deleted
+at the end of the next normal indexing run. You can get the list of stemmer
+names from the 
+.B recollindex \-l
+command. Note that this is mostly for experimental use, the normal way to
+add a stemming language is to set it in the configuration, either by
+editing "recoll.conf" or by using the GUI indexing configuration dialog.
+.br
+At the time of this writing, the following languages
+are recognized (out of Xapian's stem.h):
+.IP \(bu
+danish
+.IP \(bu
+dutch
+.IP \(bu
+english Martin Porter's 2002 revision of his stemmer
+.IP \(bu
+english_lovins Lovin's stemmer
+.IP \(bu
+english_porter Porter's stemmer as described in his 1980 paper
+.IP \(bu
+finnish 
+.IP \(bu
+french 
+.IP \(bu
+german 
+.IP \(bu
+italian
+.IP \(bu
+norwegian
+.IP \(bu
+portuguese
+.IP \(bu
+russian
+.IP \(bu
+spanish
+.IP \(bu
+swedish
+.PP
+.B recollindex \-S
+will rebuild the phonetic/orthographic index. This feature uses the 
+.B aspell
+package, which must be installed on the system.
+.PP
+.B recollindex \-E
+will check the configuration file for topdirs and other relevant paths
+existence (to help catch typos).
+.PP
+.B recollindex \--webcache-compact
+will recover the space wasted by erased page instances inside the Web
+cache. It may temporarily need to use twice the disk space used by the Web
+cache.
+.PP
+.B recollindex \--webcache-burst <destdir>
+will extract all entries from the Web cache to files created inside
+<destdir>. Each cache entry is extracted as two files, for the data and metadata.
+.PP
+.B recollindex \--notindexed [path [path ...]]
+will check each path and print out those which are absent from the index
+(with an "ABSENT" prefix), or caused an indexing error (with an "ERROR"
+prefix). If no paths are given on the command line, the command will read
+them, one per line, from stdin.
+
+.SH SEE ALSO
+.PP 
+recoll(1) recoll.conf(5)

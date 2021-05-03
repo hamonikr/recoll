@@ -1,0 +1,153 @@
+.\" $Id: recollq.1,v 1.1 2007-11-13 10:07:35 dockes Exp $ (C) 2005 J.F.Dockes\$
+.TH RECOLLQ 1 "13 November 2007"
+.SH NAME
+recollq \- command line / standard output Recoll query command.
+.SH SYNOPSIS
+.B recollq
+[
+.B \-c
+<configdir>
+]
+[
+.B \-o
+|
+.B \-f
+|
+.B \-a
+]
+[
+.B \-b
+]
+[
+.B \-d
+]
+[
+.B \-A
+]
+[
+.B \-p
+]
+[
+.B \-e
+]
+[
+.B \-m
+]
+[
+.B \-n
+<[first-]cnt>
+]
+[
+.B \-Q
+]
+[
+.B \-s
+<stemming language>
+]
+[
+.B \-S
+<fldname>
+]
+[
+.B \-D
+]
+[
+.B \-i
+<additional index directory>
+]
+[
+.B \-F
+<quoted space separated field name list>
+]
+<query string>
+
+.B recollq \-P
+
+.SH DESCRIPTION
+The
+.B recollq
+command will execute the Recoll query specified on the command line and
+print the results to the standard output. It is primarily designed for
+diagnostics, or piping the data to some other program. The basic format and
+its variations can be useful for command line querying. The \-F option
+should exclusively be used for using the output data in another program, as
+it is the only one for which output is guaranteed to be fully parseable.
+.PP
+The 
+.B \-c 
+option specifies the configuration directory name, overriding the
+default or $RECOLL_CONFDIR.
+.PP
+The query string is built by concatenating all arguments found at the end
+of the command line (after the options). It will be interpreted by default
+as a query language string. Quoting should be used as needed to escape
+characters that might be interpreted by the shell (ie: wildcards).
+.B \-a 
+is specified, the query string will be interpreted as an
+.I all words
+simple search query. If 
+.B \-o 
+is specified, the query string will be interpreted as an
+.I any word
+simple search query. If 
+.B \-f
+is specified, the query string will be interpreted as a
+.I file name
+simple search query. 
+.PP
+.B \-b
+(basic) can be specified to only print the result urls in the output
+stream.
+.PP
+If 
+.B \-d
+is set, the text for the result files contents will be dumped to stdout.
+.PP
+If 
+.B \-m
+is set, the whole metadata array will be dumped for each document.
+.PP
+If 
+.B \-A
+is set, the document abstracts will be printed. With an additional
+.B \-p
+option, snippets with page numbers (when available) will be shown instead.
+.PP
+.B \-S
+<fieldname>
+sorts the results according to the specified field. Use 
+.B \-D 
+for descending order.
+.PP
+.B \-n
+<cnt>
+can be used to set the maximum number of results that should be
+printed. The default is 2000. Use a value of 0 for no limit.
+.PP
+.B \-s
+<language>
+selects the word stemming language. The value should match an existing
+stemming database (as set in the configuration or added with recollindex \-s).
+.PP
+.B \-i
+<extra dbdir>
+adds the specified Xapian index to the set used for the query. Can be
+specified multiple times.
+.PP 
+.B \-F
+<space separated field list> (one argument, e.g. "author title")
+should be used for piping the data to another program. After 2 initial
+lines showing the actual query and the estimated result counts, it will
+print one line for each result document. Each line will have 
+exactly the fields requested on the command line. Fields are encoded in
+base64 and separated by one space character. Empty fields are indicated by
+consecutive space characters. There is one additional space character at
+the end of each line.
+.PP
+.B recollq \-P
+(Period) will print the minimum and maximum modification years for
+documents in the index.
+
+.SH SEE ALSO
+.PP 
+recollindex(1) recollq(1) recoll.conf(5) 

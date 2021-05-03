@@ -1,0 +1,181 @@
+# (C) 2007-2011 J.F.Dockes
+# License: GPL V2
+#
+# Field names configuration. This defines how one may search ie for:
+#   author:Hemingway
+#
+# Important: 
+#   - the field names MUST be all lowercase alphabetic ascii here. They can
+#     be anycased in the documents.
+
+[prefixes]
+
+#####################################################
+# This section defines what prefix the terms inside named fields will be
+# indexed with (in addition to prefix-less indexing for general search)
+# ALL prefixes MUST be all ASCII UPPERCASE (NO DIGITS)
+# 
+# The field names should be the canonic ones, not the aliases defined in
+# the following section. Don't change those which are predefined here, 
+# quite a few are hard-coded in the c++. But you can add more (for new
+# fields emitted by filters).
+#
+# Fields can have two relevance boost factors defined, such as in:
+# caption = S ; wdfinc=10
+#  and/or
+# caption = S ; boost = 10
+# The first line would boost the xapian "within document frequency" of
+# caption terms by a factor of 10 at indexing time. The second one 
+# (NOT CURRENTLY IMPLEMENTED) would automatically boost the weight of a
+# caption-based field query (ie: caption:mytitle or title:mytitle) at query
+# time.
+#
+# The pfxonly attribute can also be set on entries to express that terms
+# from the field should be indexed only with a prefix (in general, field
+# terms are indexed both with and without a prefix).
+
+# The following ones are probably hard-coded in the c code, can't change at
+# all.
+# Also reserved: F(parentid), Q(uniqueid)
+#   XE (file ext), XP (for path elements), XSFN, XSFS, XXST, XXND, XXPG
+# Using XX was not a good idea. 
+#
+# There was initially some effort made to have some compatibility with
+# Xapian Omega, but it probably is now irrelevant, given how differently
+# the indexes are now structured. In any case see
+# xapian/applications/omega/docs/termprefixes.rst in the Xapian source for
+# Xapian/Omega  prefix usage. In a nutshell Omega reserves all single
+# letters except X which is the start for user-defined prefixes.
+#
+# Recoll uses a lot of X-starting prefixes, and also some XX ones so that
+# locally defined prefixes should start with XY to avoid any possible
+# collision with the predefined ones.
+#
+# I hereby commit to not using XY for Recoll.
+# *** USE XY for beginning your local prefixes *** e.g.:
+# myfield = XYMYFIELD
+
+author = A
+xapdate = D
+keywords= K
+xapyearmon = M
+title = S ; wdfinc = 10
+mtype = T
+ext = XE; noterms = 1
+rclmd5 = XM
+dir = XP ; noterms = 1
+abstract = XS
+filename = XSFN ; noterms = 1
+containerfilename = XCFN ; pfxonly = 1 ; noterms = 1
+rclUnsplitFN = XSFS
+xapyear = Y
+recipient = XTO
+rclbes = XB ; noterms = 1
+annotation = XA
+
+[values]
+###########
+## Fields which will be stored in Xapian values, authorizing range query
+## processing.
+# Entries are specified as 'fieldname = valueslot;[px=val1;py=val2...]'.
+# Xapian value slots are 32 bits numbers. Numbers below 1000 are reserved
+# by Recoll or Xapian. Numbers above are available for user configuration
+# Values have types, which can be 'int' or 'string' at the moment. ints have
+# an additional 'len' attributes, which specifies the padding size used for
+# sorting (leading zeroes: all xapian sorting is text-based). 10 is fine
+# for an unsigned 32 bits integer.
+# myfield = 1001; type=int; len = 10
+# mystrfield = 1002; type = string
+
+[stored]
+############################
+# Some fields are stored in the document data record inside the index and
+# can be displayed in result lists. There is no necessity that stored fields
+# should be indexed (have a prefix in the preceding section). Example: "url"
+#
+# Some fields are stored by default, don't add them here:
+#    caption, mimetype, url
+# Only canonical names should be used here, not aliases.
+# "rclaptg" is used for viewer specialization (depending on local config)
+# "rclbes" defines the backend type (ie normal fs, firefox cache). Should
+#   probably be hardcoded, don't remove it
+abstract=
+author=
+filename=
+keywords=
+rclaptg=
+rclbes=
+recipient=
+annotation=
+
+[aliases]
+##########################
+# This section defines field names aliases or synonyms. Any right hand side
+# value will be turned into the lhs canonic name before further treatment
+#
+# The left-hand values in the recoll distribution file are well known and
+# must match names used in the c++ code, or even the index data
+# record. They can't change! But you can add others.
+#
+# Filters should only add canonic names to the meta array when indexing,
+# not aliases.
+abstract = summary dc:summary description xesam:description
+author = creator dc:creator xesam:author xesam:creator from
+title = caption title dc:title subject
+# catg = dc:type contentCategory
+dbytes = size xesam:size
+dmtime = dc:date dc:datemodified datemodified contentmodified \
+       xesam:contentmodified
+ext = fileextension xesam:fileextension
+# Don't add subject to keywords aliases, it's better to keep it for email
+keywords = keyword xesam:keyword tag tags dc:subject xesam:subject \
+	 dc:description
+mtype = mime mimetype xesam:mimetype contenttype xesam:contenttype dc:format
+recipient = to xesam:recipient
+url = dc:identifier xesam:url
+annotation = pdfannot
+
+##################
+# The queryaliases section defines aliases which are used exclusively at
+# query time: there is no risk to pick up a random field from a document
+# (e.g. an HTML meta field) and index it. 
+[queryaliases]
+filename = fn
+containerfilename = cfn
+annotation = annot pa
+
+[xattrtofields]
+######################
+# Processing for extended file attributes.
+# By default, attributes are processed as document fields (after removing
+# the 'user' prefix from the name on Linux).
+# You can enter name translations as "xattrname = fieldname". Case matters.
+# Entering an empty translation will disable use of the attribute.
+# The values from the extended attributes will extend, not replace, the
+# data found from equivalent fields inside the document. 
+
+# As an example, the following would map a quite plausible "tags" extended
+# attribute into the "keywords" field.
+tags = keywords
+
+# Proposed or standard freedesktop.org extended attributes
+xdg.tags = keywords
+xdg.comment = abstract
+
+# Some standard fields are not to be indexed
+mime_type =
+charset =
+
+########################
+# Sections reserved for specific filters follow
+#
+
+##########################
+# Mail filter section. You can specify mail headers to be indexed 
+# in addition to the standard ones: (To:, Cc:, From:, Subject:, Date, 
+# Message-Id), along with the field name to be used. For this to be useful, 
+# the field name should also be listed in the [prefixes] and possibly the
+# [stored] sections.
+#
+# [mail]
+# x-my-tag = mymailtag

@@ -1,0 +1,64 @@
+from setuptools import setup, Extension
+import os
+import sys
+
+sysname = os.uname()[0]
+
+# For shadow builds: references to the source tree
+top = os.path.join('@srcdir@', '..', '..')
+pytop = '@srcdir@'
+
+# For shadow builds: reference to the top of the local tree (for finding
+# generated .h files, e.g. autoconfig.h)
+localtop = os.path.join(os.path.dirname(__file__), '..', '..')
+
+library_dirs = [os.path.join(localtop, '.libs')]
+if "CYGWIN" in os.environ:
+	libraries =  ['recoll', 'xapian', 'iconv', 'z']
+else:
+	libraries = ['recoll']
+	
+extra_compile_args = ['-std=c++11']
+
+if 'libdir' in os.environ and os.environ['libdir'] != "":
+    runtime_library_dirs = [os.path.join(os.environ['libdir'], 'recoll')]
+else:
+    runtime_library_dirs = [os.path.join('@prefix@', 'lib', 'recoll')]
+
+module1 = Extension('_recoll',
+                    define_macros = [('MAJOR_VERSION', '1'),
+                                     ('MINOR_VERSION', '0'),
+                                     ('RECOLL_DATADIR', '"@RECOLL_DATADIR@"')
+                                     ],
+                    include_dirs = ['/usr/local/include',
+                                    os.path.join(top, 'utils'), 
+                                    os.path.join(top, 'common'),
+                                    os.path.join(localtop, 'common'),
+                                    os.path.join(top, 'common'), 
+                                    os.path.join(top, 'internfile'), 
+                                    os.path.join(top, 'rcldb'), 
+                                    os.path.join(top, 'query'), 
+                                    os.path.join(top, 'unac')
+                                    ],
+                    extra_compile_args = extra_compile_args,
+                    libraries = libraries,
+                    library_dirs = library_dirs,
+                    runtime_library_dirs = runtime_library_dirs,
+                    sources = [os.path.join(pytop, 'pyrecoll.cpp'),
+                               os.path.join(pytop, 'pyresultstore.cpp'),
+                               os.path.join(pytop, 'pyrclextract.cpp')
+                               ])
+
+setup (name = 'Recoll',
+       version = '1.0',
+       description = 'Query/Augment a Recoll full text index',
+       author = 'J.F. Dockes',
+       author_email = 'jfd@recoll.org',
+       url = 'http://www.recoll.org',
+       license = 'GPL',
+       package_dir = {'' : os.path.join(top, 'python', 'recoll')},
+       long_description = '''
+''',
+    packages = ['recoll'],
+    ext_package = 'recoll',
+    ext_modules = [module1])

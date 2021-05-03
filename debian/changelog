@@ -1,0 +1,785 @@
+recoll (1.31.0-1hamonikr1) jin; urgency=medium
+
+  * Release for HamoniKR
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 03 May 2021 15:53:41 +0900
+
+recoll (1.26.3-1build1) focal; urgency=medium
+
+  * No-change rebuild to drop python3.7.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 18 Feb 2020 10:25:27 +0100
+
+recoll (1.26.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Bumped libxapian-dev version dependency.
+
+ -- Kartik Mistry <kartik@debian.org>  Sun, 01 Dec 2019 19:01:12 +0530
+
+recoll (1.26.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 07 Nov 2019 18:22:36 +0530
+
+recoll (1.26.0-2) unstable; urgency=low
+
+  * debian/patches/blhc.diff:
+    + Added patch to fix blhc missing CPP/CXXFLAGS.
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 18 Oct 2019 20:20:21 +0530
+
+recoll (1.26.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added debian/gitlab-ci.yml.
+  * Bumped dh to 12.
+  * debian/patches/wrong-interpreter.diff, debian/patches/path_max.diff:
+    + Dropped. Applied upstream.
+  * debian/control:
+    + Added missing Build-Depends.
+    + Updated Standards-Version to 4.4.1
+    + Removed python-recoll package (Closes: #938341)
+    + Suggests more helpers (Closes: #942072)
+  * debian/rules:
+    + Moved to dh based rules.
+    + Removed python2 bits.
+    + Updated for dh 12.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 17 Oct 2019 10:45:38 +0530
+
+recoll (1.24.3-4) unstable; urgency=low
+
+  * debian/patches/path_max.diff:
+    + Added patch to fix build on hurd-i386 from upstream.
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 14 Dec 2018 20:59:39 +0530
+
+recoll (1.24.3-3) unstable; urgency=low
+
+  * debian/rules:
+    + Added patch to enable parallel building. Thanks Pino Toscano.
+      (Closes: #914782)
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 27 Nov 2018 14:09:56 +0530
+
+recoll (1.24.3-2) unstable; urgency=low
+
+  * debian/control:
+    + Added missing python dependencies.
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 26 Nov 2018 19:10:40 +0530
+
+recoll (1.24.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/recoll-qabstractviewitem.diff:
+    + Dropped. Merged upstream.
+  * Fixed upstream signing key.
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 20 Nov 2018 18:18:54 +0530
+
+recoll (1.24.1-4) unstable; urgency=low
+
+  * debian/control:
+    + recollcmd: Move python* from Depends to Recommends (Closes: #912449)
+    + Fixed typo: python-libxm2 -> python-libxml2.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 01 Nov 2018 11:25:01 +0530
+
+recoll (1.24.1-3) unstable; urgency=medium
+
+  * debian/patches:
+    + Added patch to fix FTBFS (Closes: #906764)
+    + Added patch to fix wrong interpreter path.
+  * debian/control:
+    + Updated Standards-Version to 4.2.1
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 27 Aug 2018 21:35:38 +0530
+
+recoll (1.24.1-2) unstable; urgency=medium
+
+  * debian/rules:
+    + Fix FTBFS when built with dpkg-buildpackage -A (Closes: #900311)
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 28 Jun 2018 17:26:02 +0530
+
+recoll (1.24.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Removed X-Python-Version field.
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 16 May 2018 17:04:15 +0530
+
+recoll (1.24.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Updated upstream signing key.
+  * debian/control:
+    + Updated Standards-Version to 4.1.4
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 03 May 2018 18:10:30 +0530
+
+recoll (1.23.7-4) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/control:
+    + Use https in URL.
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 03 Apr 2018 10:45:36 +0530
+
+recoll (1.23.7-3) experimental; urgency=low
+
+  * debian/control:
+    + Fixed version in Breaks and Replaces (Closes: #888302)
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 26 Jan 2018 21:14:45 -0800
+
+recoll (1.23.7-2) experimental; urgency=low
+
+  * debian/control, debian/*.install:
+    + Splited package to separate GUI and commandline programs:
+      recollgui and recollcmd (Closes: #602229)
+    + Updated descriptions.
+  * debian/README.Debian:
+    + Updated for package split.
+  * debian/rules:
+    + Enabled recollq (Closes: #841067)
+  * Updated lintian override.
+  * debian/copyright:
+    + http->https in some URLs.
+  * debian/watch:
+    + Add upstream pgp key option.
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 23 Jan 2018 00:17:10 +0530
+
+recoll (1.23.7-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Changed Vcs-* to salsa.debian.org
+    + Updated Standards-Version to 4.1.3
+    + Removed autotools-dev from Build-Deps.
+    + Removed catdoc from Suggests. Not needed for recoll > 1.1.19.
+    + Added python3 as a dependency.
+    + Add packages to Suggests (Closes: #831812, #869809)
+  * Bumped dh compat to 11.
+  * Use https URL in debian/watch URL.
+  * recoll.lintian-overrides:
+    + Removed unused lintian overrides.
+    + Added override: package-has-unnecessary-activation-of-ldconfig-trigger.
+  * debian/rules:
+    + Don't set CFLAGS and others.
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 12 Jan 2018 22:04:24 +0530
+
+recoll (1.23.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Updated Standards-Version to 4.1.1
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 13 Oct 2017 13:41:54 +0530
+
+recoll (1.23.2-1) unstable; urgency=low
+
+  * New upstream release:
+    + Index new Libreoffice file formats (Closes: #856605)
+  * Removed unused lintian override.
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 17 May 2017 21:13:39 +0530
+
+recoll (1.22.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 09 Dec 2016 18:48:48 +0530
+
+recoll (1.22.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Updated Standards-Version to 3.9.8
+    + Updated Vcs-* URLs.
+    + Depends on python.
+  * debian/copyright:
+    + Removed and updated sections for new upstream release.
+  * debian/rules:
+    + Removed .la files.
+    + Removed empty dbg packages.
+    + Fix executable scripts.
+  * Override 'python-script-but-no-python-dep' Lintian as they are not used
+    directly.
+  * Removed debian/patches/fix-python-install.patch, merged upstream.
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 04 Jul 2016 12:38:41 +0530
+
+recoll (1.21.5-1) unstable; urgency=medium
+
+  * Acknowledge NMUs. Thanks!
+  * New upstream release.
+  * debian/control:
+    + Vcs-* URL to use https:// instead of git://
+  * Set debian/compat to 9.
+  * Removed debian/recoll.menu file.
+
+ -- Kartik Mistry <kartik@debian.org>  Sat, 30 Jan 2016 19:41:54 +0530
+
+recoll (1.21.0-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload with the maintainer's approval.
+  * Switch to Qt 5 (Closes: #784523).
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Wed, 27 Jan 2016 11:35:47 -0300
+
+recoll (1.21.0-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload (agreed by maintainer). (Closes: #809478)
+  * Add support for building for all supported python3 versions (this is a
+    better solution than the one proposed in #793636
+    - Change python3-dev build-dep back to python3-all-dev
+    - Add loop over supported python3 versions to install rule
+
+ -- Scott Kitterman <scott@kitterman.com>  Tue, 12 Jan 2016 20:39:01 -0500
+
+recoll (1.21.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Build-depend on python3-dev, python-dev, not python3-all-dev and
+      python-all-dev. Thanks to Steve Langasek for patch. (Closes: #793636)
+    + Added Build-depends on bison.
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 03 Aug 2015 14:16:32 +0530
+
+recoll (1.20.3-2) unstable; urgency=low
+
+  * Upload to unstable
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 06 May 2015 10:11:52 +0530
+
+recoll (1.20.3-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    + Removed dependency on hardening-wrapper; Using dpkg-buildflags
+    + Updated Standards-Version to 3.9.6
+    + Added dh-python in Build-Depends.
+  * debian/rules:
+    + Fixed flags.
+    + Use dpkg-buildflags.
+  * debian/patches:
+    + Removed fix-filter-shebang.patch; Merged upstream.
+  * debian/copyright:
+    + Removed unused licenses and fixed DEP5 formatting.
+  * Added recoll.lintian-overrides for useless postinst/postrm ldconfig calls.
+
+ -- Kartik Mistry <kartik@debian.org>  Sun, 29 Mar 2015 23:17:31 +0530
+
+recoll (1.19.13-1) experimental; urgency=low
+
+  * New upstream release.
+  * Uploaded to unstable.
+  * debian/control:
+    + Added new package python3-recoll for Python3.
+    + Updated Standards-Version to 3.9.5
+    + python*-recoll depends on recoll (= ${binary:Version})
+  * debian/rules:
+    + dh_python2/dh_python3 target for separated package.
+    + Fixed installation of some filters.
+  * Updated debian/watch file.
+  * Updated python-recoll.install file.
+  * Updated debian/copyright.
+  * Added patch to fix shebang for some filters.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 08 May 2014 15:01:30 +0530
+
+recoll (1.19.7-1) experimental; urgency=low
+
+  * New upstream release.
+  * Updated debian/watch file.
+
+ -- Kartik Mistry <kartik@debian.org>  Sun, 06 Oct 2013 21:22:26 +0530
+
+recoll (1.19.5-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/patches:
+    + Removed: fix-manpage-typos.patch. Merged upstream.
+    + Refreshed: fix-python-install.patch.
+  * debian/control:
+    + Updated Standards-Version to 3.9.4
+  * debian/*.install, debian/rules:
+    + Updated for upstream changes.
+
+ -- Kartik Mistry <kartik@debian.org>  Sun, 29 Sep 2013 20:13:59 +0530
+
+recoll (1.18.1-1) experimental; urgency=low
+
+  * New upstream version:
+    + Please read README.Debian for changes in index db format.
+  * debian/patches/txtcsvopen.diff:
+    + Dropped. Merged upstream.
+  * debian/patches/fix-manpage-typos.patch:
+    + Added patch to fix manpage typos and groff errors.
+  * debian/control:
+    + Added VCS-* fields.
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 13 Nov 2012 12:29:46 +0530
+
+recoll (1.17.3-2) unstable; urgency=medium
+
+  * debian/rules:
+    + Call dh_python2 for python-recoll. (Closes: #681586)
+  * debian/control:
+    + Added X-Python-Version field for correct Python version dependency.
+
+ -- Kartik Mistry <kartik@debian.org>  Sat, 14 Jul 2012 20:20:56 +0530
+
+recoll (1.17.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/txtcsvopen.diff:
+    + Added patch to fix opening of compressed text-files with gnumeric.
+      (Closes: #674756)
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 08 Jun 2012 11:46:57 +0530
+
+recoll (1.17.2-1) unstable; urgency=low
+
+  * New upstream release:
+    + Dropped patches: fix-kFreeBSD-ftbfs.patch, recoll_ionice_getpid.patch.
+      These are merged with upstream.
+    + Refreshed patch: fix-python-install.patch.
+  * debian/rules, debian/control:
+    + Added hardening support.
+  * debian/copyright:
+    + Fixed duplicate Copyright sections.
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 18 May 2012 10:59:21 +0530
+
+recoll (1.17.1-2) unstable; urgency=low
+
+  * debian/patches:
+    + fix-kFreeBSD-ftbfs.patch: Added patch to fix FTBFS on kFreeBSD from
+      upstream (Closes: #667083)
+    + recoll_ionice_getpid.patch: Added patch to fix FTBFS with gcc-4.7 from
+      upstream (Closes: #667352)
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 04 Apr 2012 12:16:48 +0530
+
+recoll (1.17.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Enable Python module resulting into new binary: python-recoll.
+  * debian/control:
+    + Updated Build-Deps: libqtwebkit-dev, python-all-dev.
+    + Added python-recoll binary.
+    + Updated Standards-Version to 3.9.3
+  * debian/rules:
+    + Build Python module by default.
+  * debian/recoll.menu, debian/python-recoll.install, debian/recoll.install:
+    + Changes for new binary package.
+  * debian/copyright:
+    + Updated to copyright-format 1.0
+    + Updated upstream and Debian copyright.
+    + Fixed unicode.org/copyright.html URL.
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 27 Mar 2012 12:15:51 +0530
+
+recoll (1.16.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright:
+    + Updated as per DEP-5 format, simplying copyright file.
+  * debian/control:
+    + Dropped: flac, vorbis-tools and libid3-tools from Suggests, as
+      python-mutagen handles audio now.
+    + Dropped: lyx from Suggests, as it will be too heavy for most of users as
+      discussed with upstream.
+  * debian/rules:
+    + Use STRIP variable to strip during install phase. This makes patch
+      01_nostrip_final_binaries_437901.diff obsolete, removed this patch.
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 09 Nov 2011 20:35:16 +0530
+
+recoll (1.16.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright:
+    + Added missing GPL-3 URL in debian/* copyright section.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 29 Sep 2011 10:06:54 +0530
+
+recoll (1.16.0-1) unstable; urgency=low
+
+  * New upstream release:
+    + See README.Debian for upgrade note and information.
+  * debian/copyright:
+    + Updated as per latest DEP-5 format.
+  * debian/control:
+    + Recommends: xdg-utils now.
+  * debian/rules:
+    + Added recommends build targets.
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 22 Sep 2011 21:30:25 +0530
+
+recoll (1.15.9-1) unstable; urgency=low
+
+  * New upstream release:
+    + Dropped patch 02_recoll_staticfix_626882.diff, merged upstream
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 15 Jun 2011 09:20:20 +0530
+
+recoll (1.15.8-2) unstable; urgency=low
+
+  * debian/patches/02_recoll_staticfix_626882.diff:
+    + Added patch to fix segfault in 1.15.8. Patch from Jean-Francois Dockes
+      <jf@dockes.org> (Closes: #626882)
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 17 May 2011 09:57:50 +0530
+
+recoll (1.15.8-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/02_kfreebsd-ftbfs.diff:
+    + Removed. Merged with upstream.
+  * debian/control:
+    + Updated to Standards-Version 3.9.2 (no changes needed)
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 12 May 2011 09:47:21 +0530
+
+recoll (1.15.7-2) unstable; urgency=low
+
+  * Applied patch 02_kfreebsd-ftbfs.diff from upstream to fix FTBFS
+    on kFreeBSD-* (Closes: #618796)
+  * debian/copyright:
+    + Updated to latest DEP-5 specification
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 15 Apr 2011 18:38:54 +0530
+
+recoll (1.15.7-1) unstable; urgency=low
+
+  * New upstream release:
+    + Fixed: Segmentation fault when file type radio button clicked.
+      (Closes: #617353)
+  * debian/patches/02_manpage_fix.diff:
+    + Removed. Merged with upstream.
+
+ -- Kartik Mistry <kartik@debian.org>  Sun, 13 Mar 2011 09:07:57 +0530
+
+recoll (1.15.2-1) unstable; urgency=low
+
+  * Upload to unstable
+  * New upstream release
+  * debian/patches:
+    + Refreshed 01_nostrip_final_binaries_437901.diff
+    + Added 02_manpage_fix.diff to fix manpage groff issues
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 15 Feb 2011 11:25:58 +0530
+
+recoll (1.14.4-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/copyright:
+    + Updated for DEP-5 format specification
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 02 Dec 2010 00:29:06 +0530
+
+recoll (1.14.2-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Added xlstproc as Recommends (Closes: #587684)
+    + Added python-mutagen as Suggests
+  * debian/patches:
+    + Refreshed 01_nostrip_final_binaries_437901.diff
+    + Removed 02_recoll-prepare-for-xapian-1.2.diff, merged with upstream
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 27 Sep 2010 17:52:17 +0530
+
+recoll (1.13.04-3) unstable; urgency=low
+
+  * Added patch for xapian 1.2 compatibility from Olly Betts <olly@survex.com>
+    (Closes: #579929)
+
+ -- Kartik Mistry <kartik@debian.org>  Mon, 03 May 2010 09:47:16 +0530
+
+recoll (1.13.04-2) unstable; urgency=low
+
+  * debian/control:
+    + Added missing packages to Suggests: flac, libid3-tools, lyx, pstotext,
+      python-chm, untex, vorbis-tools Thanks to Ivan Vilata i Balaguer
+      <ivan@selidor.net> (Closes: #578441)
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 23 Apr 2010 11:07:00 +0530
+
+recoll (1.13.04-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 16 Apr 2010 10:39:02 +0530
+
+recoll (1.13.02-2) unstable; urgency=low
+
+  * debian/control:
+    + Don't suggest xpdf (Closes: #569333)
+  * debian/copyright:
+    + Updated Debian package copyright year
+  * Removed unused README.source file
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 19 Feb 2010 10:42:53 +0530
+
+recoll (1.13.02-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Updated to Standards-Version 3.8.4 (no changes needed)
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 03 Feb 2010 11:00:53 +0530
+
+recoll (1.13.01-1) unstable; urgency=low
+
+  * New upstream release
+    + Fixed bug that causes field values ignored for Capitalized words and
+      phrases
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 08 Jan 2010 10:09:15 +0530
+
+recoll (1.13.00-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Fixed package descriptions, replaced QT->Qt (Closes: #563725)
+  * debian/patches/01_nostrip_final_binaries_437901.diff:
+    + Refreshed patch for upstream changes
+  * Converted package to new source format '3.0 (quilt)'
+
+ -- Kartik Mistry <kartik@debian.org>  Tue, 05 Jan 2010 23:23:30 +0530
+
+recoll (1.12.4-1) unstable; urgency=low
+
+  * New upstream release:
+    + Fixed FTBFS with binutils-gold (Closes: #556315)
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 11 Dec 2009 00:08:37 +0530
+
+recoll (1.12.3-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Updated Build-Depends on libqt4-dev as we are building Qt4 ui now
+  * debian/rules:
+    + Make sure that we call qmake-qt4
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 29 Oct 2009 22:44:50 +0530
+
+recoll (1.12.2-1) unstable; urgency=low
+
+  * New upstream release:
+    + Dropped patch 02_manpage_fixes.diff, merged with upstream
+  * Added debian/README.source file to confirm with latest policy
+  * Removed debian/docs, we are using dh_installdocs in debian/rules
+  * debian/control:
+    + Wrapped up Build-Depends
+    + Depends on quilt, since patch system is using quilt now
+    + Updated to Standards-Version 3.8.3
+    + Updated dependency on libxapian-dev (>= 1.0.15)
+  * debian/rules:
+    + Changes for quilt migration
+
+ -- Kartik Mistry <kartik@debian.org>  Fri, 23 Oct 2009 10:14:05 +0530
+
+recoll (1.12.1-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Updated to Standards-Version 3.8.2 (no changes needed)
+  * debian/copyright:
+    + [Lintian] Removed licenses URL links to symlink
+
+ -- Kartik Mistry <kartik@debian.org>  Sat, 27 Jun 2009 20:08:28 +0530
+
+recoll (1.12.0-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/copyright:
+    + [Lintian] Updated for use of correct copyright symbol © instead of (C)
+    + Updated Debian packaging copyright year
+  * debian/rules:
+    + Used dh_prep instead of deprecated dh_clean -k
+  * debian/control:
+    + Updated debhelper dependency to 7
+  * debian/patches:
+    + Dropped 02_gcc-snapshot-missing-headers-fix.dpatch, merged with upstream
+    + Added patch 02_manpage_fixes.dpatch for groff warnings
+
+ -- Kartik Mistry <kartik@debian.org>  Sat, 28 Feb 2009 14:33:53 +0530
+
+recoll (1.11.0-2) unstable; urgency=low
+
+  * debian/control:
+    + Added versioned build-dep on libxapian-dev, Thanks to Brad Sawatzky
+      <brad+debian@swatter.net> for catch (Closes: #507473)
+    + Add libimage-exiftool-perl as Suggests in which I forgot in
+      previous upload
+  * debian/changelog:
+    + Fixed typo from previous upload entry
+
+ -- Kartik Mistry <kartik@debian.org>  Wed, 03 Dec 2008 15:05:55 +0530
+
+recoll (1.11.0-1) unstable; urgency=low
+
+  * New upstream release:
+    + Remembers missing filters in first run (Closes: #500690)
+  * debian/control:
+    + Added libimage-exiftool-perl as Suggests (Closes: #502427)
+    + Added Python as recommaded due to filters/rclpython script
+      although, its not necessary as it will be installed only
+      when Python is present
+  * debian/patches:
+    + Refreshed patch for gcc 4.4 FTBFS (Closes: #505376)
+  * debian/copyright:
+    + Updated for newly added filter and image files
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 13 Nov 2008 21:18:15 +0530
+
+recoll (1.10.6-1) unstable; urgency=low
+
+  * New upstream release
+    + Fixed typo in tooltip in indexing configuration (Closes: #486689)
+    + Dropped patch 03_manpage_fixes.dpatch, merged with upstream
+  * debian/control:
+    + Updated to Standards-Version 3.8.0 (no changes needed)
+    + Updated my maintainer email address
+  * debian/copyright:
+    + Updated my maintainer email address
+    + Updated license text to proposed license format
+    + Updated upstream copyright year
+
+ -- Kartik Mistry <kartik@debian.org>  Thu, 11 Sep 2008 16:06:48 +0530
+
+recoll (1.10.2-1) unstable; urgency=low
+
+  * New upstream release
+    + Updated patch debian/patches/02_gcc-snapshot-missing-headers-fix.dpatch
+      Some portions are now merged with upstream
+  * debian/copyright:
+    + Fixed indentation to 80 characters
+    + Updated Debian package copyright year
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Thu, 29 May 2008 23:25:40 +0530
+
+recoll (1.10.1-1) unstable; urgency=low
+
+  * New upstream release
+    + Updated debian/patches/02_gcc-snapshot-missing-headers-fix.dpatch
+      Some portions are merged with upstream
+  * debian/control:
+    + Fixed short description, Thanks to Mohammed Adnène Trojette
+      <adn+deb@diwi.org>
+  * debian/patches/03_manpage_fixes.dpatch:
+    + Added patch to fix manpage groff warnings
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Wed, 27 Feb 2008 18:41:25 +0530
+
+recoll (1.10.0-5) unstable; urgency=low
+
+  * debian/patches/02_gcc-snapshot-missing-headers-fix.dpatch:
+    + Really fixed the FTBFS with gcc-4.3/g++-4.3 (Closes: #455652)
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Sun, 27 Jan 2008 14:37:53 +0530
+
+recoll (1.10.0-4) unstable; urgency=low
+
+  * debian/patches/02_gcc-snapshot-missing-headers-fix.dpatch:
+    + Updated patch to fix missing include header in qtgui/main.cpp
+      (Closes: #455652)
+  * debian/copyright:
+    + Updated missing license for qtgui/q3richtext_p.h
+    + Moved other copyright holders for GPL above license
+      to make it readable
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Wed, 23 Jan 2008 10:42:20 +0530
+
+recoll (1.10.0-3) unstable; urgency=low
+
+  * debian/control:
+    + Added external helper programs and utilities to Suggests field
+     (Closes: #441629, #457033)
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Fri, 28 Dec 2007 08:12:52 +0530
+
+recoll (1.10.0-2) unstable; urgency=low
+
+  * debian/control:
+    + Updated Standards-Version to 3.7.3
+  * debian/patches/02_gcc-snapshot-missing-headers-fix.dpatch:
+    + Added patch to fix compilation with gcc-snapshot due to
+      missing headers (Closes: #455652)
+  * debian/rules:
+    + Fixed clean target
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Tue, 11 Dec 2007 14:42:47 +0530
+
+recoll (1.10.0-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    + Moved Homepage: entry to control field
+    + Dropped unnecessary dependency on qt3-dev-tools
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Wed, 28 Nov 2007 19:54:58 +0530
+
+recoll (1.9.0-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/patches: dropped 02_desktop_entry_fixes.dpatch, merged with
+    upstream, rewrote 01_nostrip_final_binary_437901.dpatch after upstream
+    changes
+  * debian/menu: used Data Management since it is better and appropriate
+  * debian/copyright: added missing copyright from index/csguess.cpp
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Wed, 12 Sep 2007 14:05:39 +0530
+
+recoll (1.8.2-3) unstable; urgency=low
+
+  * debian/rules: added better clean target, better configure flags,
+    separated LDFLAGS
+  * Added dpatch support
+  * debian/patches/01_nostrip_final_binary_437901.dpatch: added patch to not
+    strip binary from upstream (Closes: #437901)
+  * debian/patches/02_desktop_entry_fixes.dpatch: added patch to fix desktop
+    menu entry according to freedesktop standards
+  * debian/menu: fixed according to latest menu policy, changed subsection to
+    Tools from Databases (hint taken from beagle)
+  * debian/copyright: moved copyright out of license section, adjusted
+    copyrights portions under proper license
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Sat, 18 Aug 2007 20:28:49 +0530
+
+recoll (1.8.2-2) unstable; urgency=low
+
+  * debian/rules: xapian is dynamically linked now, Thanks to
+    Jean-Francois Dockes <jean-francois.dockes@wanadoo.fr> (Closes: #427783)
+  * Fixed debian/watch file, Thanks to Vincent Fourmond <fourmond@debian.org>
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Fri, 08 Jun 2007 10:51:01 +0530
+
+recoll (1.8.2-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/watch: fixed now
+  * debian/control: fixed long descriptions
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Tue, 22 May 2007 15:24:54 +0530
+
+recoll (1.8.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #422039)
+  * Based on package prepared by Jean-Francois Dockes <jean-francois.dockes@wanadoo.fr>
+
+ -- Kartik Mistry <kartik.mistry@gmail.com>  Thu,  3 May 2007 12:15:02 +0530
