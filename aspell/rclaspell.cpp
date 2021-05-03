@@ -70,7 +70,7 @@ bool Aspell::init(string &reason)
         if (!lang.compare("C"))
             lang = "en";
         m_lang = lang.substr(0, lang.find_first_of("_"));
-        if (!m_lang.compare("ja")) {
+        if (!m_lang.compare("ja") || !m_lang.compare("ko")) {
             // Aspell has no support for Japanese. We substitute
             // english, as Japanese users often have texts with
             // interspersed english words or english texts. Japanese

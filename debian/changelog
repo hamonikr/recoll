@@ -1,3 +1,12 @@
+recoll (1.31.0-1hamonikr2) jin; urgency=medium
+
+  * Update aspell/rclaspell.cpp
+   - Aspell has no support for Korean, so apply as en
+  * Update desktop/recoll-searchgui.desktop
+   - Add ko name and comment in desktop file
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 03 May 2021 15:53:41 +0900
+
 recoll (1.31.0-1hamonikr1) jin; urgency=medium
 
   * Release for HamoniKR

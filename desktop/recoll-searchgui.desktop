@@ -1,14 +1,13 @@
 [Desktop Entry]
 Categories=Qt;Utility;Filesystem;Database;
 Comment=Find documents by specifying search terms
-Comment[ru]=Поиск документов по заданным условиям
-Comment[de]=Finde Dokumente durch Angeben von Suchbegriffen
+Comment[ko]=데스크톱의 파일 내용을 검색합니다
 Exec=recoll
 GenericName=Local Text Search
-GenericName[ru]=Локальный текстовый поиск
-GenericName[de]=Lokale Textsuche
+GenericName[ko]=데스크톱 원문 검색
 Icon=recoll
 Name=Recoll
+Name[ko]=원문 검색 Recoll
 Terminal=false
 Type=Application
 Keywords=Search;Full Text;
