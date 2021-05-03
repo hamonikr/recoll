@@ -1,3 +1,10 @@
+recoll (1.31.0-1hamonikr3) jin; urgency=medium
+
+  * Add depends python3-pip
+  * Add postinst pip3 install pyhwp
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 03 May 2021 19:44:00 +0900
+
 recoll (1.31.0-1hamonikr2) jin; urgency=medium
 
   * Update aspell/rclaspell.cpp
