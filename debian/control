@@ -75,6 +75,7 @@ Suggests: antiword,
           python3-six,
           unrtf,
           untex,
+          docbook,
           wv
 Description: Command line programs for recoll
  This package contains command line programs for a personal full text search
@@ -93,6 +94,7 @@ Package: python3-recoll
 Architecture: any
 Section: python
 Depends: python3,
+         python3-pip, 
          recollcmd (= ${binary:Version}),
          ${misc:Depends},
          ${python3:Depends},

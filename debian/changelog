@@ -1,3 +1,14 @@
+recoll (1.31.0-1hamonikr4) jin; urgency=medium
+
+  * Add debian/python3-recoll.postinst
+  * Removed debian/postinst  
+   - Add check statement for pip3 and pyhwp
+   - Add dependancy docbook in control
+  * Update debian/rules
+   - Fix for update new translation deploy
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 04 May 2021 12:03:37 +0900
+
 recoll (1.31.0-1hamonikr3) jin; urgency=medium
 
   * Add depends python3-pip

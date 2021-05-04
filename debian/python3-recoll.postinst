@@ -1,0 +1,22 @@
+#!/bin/bash
+
+case "$1" in
+    configure)
+        if command -v pip3 &> /dev/null
+        then
+            chk_module=$(pip3 list | grep pyhwp)
+            if [[ -z $chk_module ]]; then
+                echo "Install pyhwp..."
+                pip3 install pyhwp                            
+            fi
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
