@@ -1,3 +1,11 @@
+recoll (1.31.0-1hamonikr5) jin; urgency=medium
+
+  * Add qtgui/mtpics/hwp.png
+  * Update sampleconf/mimeconf
+   - Add for HWP document mime type
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 04 May 2021 13:54:39 +0900
+
 recoll (1.31.0-1hamonikr4) jin; urgency=medium
 
   * Add debian/python3-recoll.postinst

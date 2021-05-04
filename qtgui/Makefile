@@ -2511,6 +2511,7 @@ install_imdata: first FORCE
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/emblem-symbolic-link.png $(INSTALL_ROOT)/usr/share/recoll/images/emblem-symbolic-link.png
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/folder.png $(INSTALL_ROOT)/usr/share/recoll/images/folder.png
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/html.png $(INSTALL_ROOT)/usr/share/recoll/images/html.png
+	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/hwp.png $(INSTALL_ROOT)/usr/share/recoll/images/hwp.png
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/image.png $(INSTALL_ROOT)/usr/share/recoll/images/image.png
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/message.png $(INSTALL_ROOT)/usr/share/recoll/images/message.png
 	-$(QINSTALL) /home/hamonikr/workspaces/recoll/qtgui/mtpics/mozilla_doc.png $(INSTALL_ROOT)/usr/share/recoll/images/mozilla_doc.png
@@ -2545,6 +2546,7 @@ uninstall_imdata: FORCE
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/mozilla_doc.png
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/message.png
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/image.png
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/hwp.png
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/html.png
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/folder.png
 	-$(DEL_FILE) -r $(INSTALL_ROOT)/usr/share/recoll/images/emblem-symbolic-link.png

@@ -2671,7 +2671,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Query language</source>
-        <translation>검색어 요청 언어</translation>
+        <translation>검색 조건식</translation>
     </message>
     <message>
         <source>Bad query string</source>

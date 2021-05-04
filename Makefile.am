@@ -439,6 +439,7 @@ qtgui/mtpics/drawing.png \
 qtgui/mtpics/emblem-symbolic-link.png \
 qtgui/mtpics/folder.png \
 qtgui/mtpics/html.png \
+qtgui/mtpics/hwp.png \
 qtgui/mtpics/image.png \
 qtgui/mtpics/message.png \
 qtgui/mtpics/mozilla_doc.png \

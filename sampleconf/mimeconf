@@ -297,6 +297,7 @@ application/x-fsdirectory = folder
 application/x-gnote = document
 application/x-gnuinfo = book
 application/x-gnumeric = spreadsheet
+application/x-hwp = hwp
 application/x-kword = wordprocessing
 application/x-lyx = wordprocessing
 application/x-mimehtml = message
