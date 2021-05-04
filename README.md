@@ -8,20 +8,40 @@ Desktop full-text search tool.
 
 origin : https://www.lesbonscomptes.com/recoll/
 
+![recoll-2](./imgs/recoll-2.png)
+
 ![recoll](./imgs/recoll.png)
 
+# Install
 
-# TO-DO
- * 한글 인터페이스가 없으므로 번역을 깨끗하게 추가
- * 검색결과 화면의 폰트가 너무 크게 나오고 있음. 검색결과 화면정리 필요
+## HamoniKR (>= 4.0)
+```
+sudo apt update
+sudo apt install -y recoll=1.31.0-1hamonikr5
+```
 
-# How to build
+## Ubuntu (>= 20.04)
+```
+curl -sL https://pkg.hamonikr.org/add-hamonikr.apt | sudo -E bash -
+
+sudo apt install -y recoll=1.31.0-1hamonikr5
+```
+
+# build
+## How to build from source for othrt linux
+```
+sudo apt install -y python3-pip
+sudo pip3 install pyhwp
+
+./configure
+make
+sudo make install
+```
+
+## How to build debian package
 ```
 dpkg-buildpackage -T clean
-dpkg-buildpackage -k9FA298A1E42665B8
-```
+dpkg-buildpackage
 
-# Install 
-```
 dpkg -i ../recoll*.deb
 ```
