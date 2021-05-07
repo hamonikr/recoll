@@ -5,11 +5,11 @@
     <name>AdvSearch</name>
     <message>
         <source>All clauses</source>
-        <translation>모든 절</translation>
+        <translation>모든 조건 만족</translation>
     </message>
     <message>
         <source>Any clause</source>
-        <translation>어떤 절이든지</translation>
+        <translation>하나라도 만족</translation>
     </message>
     <message>
         <source>texts</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Advanced Search</source>
-        <translation type="unfinished">Advanced Search</translation>
+        <translation>고급 검색</translation>
     </message>
     <message>
         <source>History Next</source>
@@ -69,18 +69,18 @@
     </message>
     <message>
         <source>Load next stored search</source>
-        <translation type="unfinished">Load next stored search</translation>
+        <translation>다음 저장된 검색 로드</translation>
     </message>
     <message>
         <source>Load previous stored search</source>
-        <translation type="unfinished">Load previous stored search</translation>
+        <translation>이전 저장된 검색 로드</translation>
     </message>
 </context>
 <context>
     <name>AdvSearchBase</name>
     <message>
         <source>Advanced search</source>
-        <translation>심화검색</translation>
+        <translation>고급검색</translation>
     </message>
     <message>
         <source>Restrict file types</source>
@@ -132,15 +132,15 @@
     </message>
     <message>
         <source>Search for &lt;br&gt;documents&lt;br&gt;satisfying:</source>
-        <translation>다음 기준을&lt;br&gt;만족시키는:</translation>
+        <translation>다음을&lt;br&gt;만족:</translation>
     </message>
     <message>
         <source>Delete clause</source>
-        <translation>절 삭제</translation>
+        <translation>조건 삭제</translation>
     </message>
     <message>
         <source>Add clause</source>
-        <translation>절 추가</translation>
+        <translation>조건 추가</translation>
     </message>
     <message>
         <source>Check this to enable filtering on file types</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>All non empty fields on the right will be combined with AND (&quot;All clauses&quot; choice) or OR (&quot;Any clause&quot; choice) conjunctions. &lt;br&gt;&quot;Any&quot; &quot;All&quot; and &quot;None&quot; field types can accept a mix of simple words, and phrases enclosed in double quotes.&lt;br&gt;Fields with no data are ignored.</source>
-        <translation>&quot;모든 절&quot;을 선택하였다면, 오른쪽에 입력된 모든 내용은 AND로 결합되며, &quot;어떤 절이든지&quot;를 선택하였다면 OR로 결합됩니다.&lt;br&gt;&quot;무엇이라도&quot;, &quot;모두&quot;, 그리고 &quot;없음&quot; 유형들은 단순한 단어들의 혼합도, 큰 따옴표로 묶은 어구도 받아들일 수 있으며, &lt;br&gt; 입력되지 않은 필드들은 무시됩니다.</translation>
+        <translation>&quot;모든 조건 만족&quot;을 선택하면, 오른쪽에 입력된 모든 조건은 AND로 결합되며, &quot;하나라도 만족&quot;을 선택하면 OR로 결합됩니다.&lt;br&gt;&quot;하나라도&quot;, &quot;모두&quot;, 그리고 &quot;없음&quot; 유형들은 단순 단어들의 혼합도, 큰 따옴표로 묶은 어구도 받아들일 수 있으며, &lt;br&gt; 입력되지 않은 필드들은 무시됩니다.</translation>
     </message>
     <message>
         <source>Invert</source>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <source>Indexer log file name</source>
-        <translation type="unfinished">Indexer log file name</translation>
+        <translation>색인 로그 파일명</translation>
     </message>
     <message>
         <source>If empty, the above log file name value will be used. It may useful to have a separate log for diagnostic purposes because the common log will be erased when&lt;br&gt;the GUI starts up.</source>
@@ -395,7 +395,7 @@
     </message>
     <message>
         <source>Disk full threshold percentage at which we stop indexing&lt;br&gt;E.g. 90% to stop at 90% full, 0 or 100 means no limit)</source>
-        <translation type="unfinished">Disk full threshold percentage at which we stop indexing&lt;br&gt;E.g. 90% to stop at 90% full, 0 or 100 means no limit)</translation>
+        <translation>인덱싱을 중지할 디스크 전체 임계값 백분율&lt;br&gt;(E.g. 90% 로 설정하면 90% 도달시 멈춤, 0 또는 100 은 제한이 없는 것을 의미)</translation>
     </message>
     <message>
         <source>Web history</source>
@@ -403,23 +403,23 @@
     </message>
     <message>
         <source>Process the Web history queue</source>
-        <translation type="unfinished"></translation>
+        <translation>웹 기록 큐 처리하기</translation>
     </message>
     <message>
         <source> (by default, aspell suggests mispellings when a query has no results).</source>
-        <translation type="unfinished"></translation>
+        <translation>디폴트로, 검색에 대한 결과가 없을 때 aspell 이 올바른 맞춤법을 제시합니다</translation>
     </message>
     <message>
         <source>Page recycle interval</source>
-        <translation type="unfinished"></translation>
+        <translation>페이지 재활용 간격</translation>
     </message>
     <message>
         <source>&lt;p&gt;By default, only one instance of an URL is kept in the cache. This can be changed by setting this to a value determining at what frequency we keep multiple instances (&apos;day&apos;, &apos;week&apos;, &apos;month&apos;, &apos;year&apos;). Note that increasing the interval will not erase existing entries.</source>
-        <translation type="unfinished"></translation>
+        <translation>디폴트로, 캐시에는 하나의 URL 인스턴스만 보관됩니다. 여러 인스턴스를 보관하는 빈도를 설정해 이를 변경할 수 있습니다 (&apos;day&apos;, &apos;week&apos;, &apos;month&apos;, &apos;year&apos;). 간격을 늘린다고 기존 항목이 지워지는 것은 아닙니다.</translation>
     </message>
     <message>
         <source>Note: old pages will be erased to make space for new ones when the maximum size is reached. Current size: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>참고: 최대 크기에 도달하면 이전 페이지가 지워져 새 페이지를 위한 공간을 만듭니다. 현재 크기: %1</translation>
     </message>
 </context>
 <context>
@@ -673,7 +673,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Query Fragments</source>
-        <translation>검색어 조각들</translation>
+        <translation>쿼리 프래그먼트</translation>
     </message>
 </context>
 <context>
@@ -869,7 +869,7 @@ Click Cancel if you want to edit the configuration file before indexing starts, 
     </message>
     <message>
         <source>Preview Window</source>
-        <translation type="unfinished">Preview Window</translation>
+        <translation>미리보기 화면</translation>
     </message>
     <message>
         <source>Close Window</source>
@@ -885,7 +885,7 @@ Click Cancel if you want to edit the configuration file before indexing starts, 
     </message>
     <message>
         <source>Close tab</source>
-        <translation type="unfinished">Close tab</translation>
+        <translation>탭 닫기</translation>
     </message>
     <message>
         <source>Print tab</source>
@@ -893,15 +893,15 @@ Click Cancel if you want to edit the configuration file before indexing starts, 
     </message>
     <message>
         <source>Close preview window</source>
-        <translation type="unfinished">Close preview window</translation>
+        <translation>미리보기 화면 닫기</translation>
     </message>
     <message>
         <source>Show next result</source>
-        <translation type="unfinished">Show next result</translation>
+        <translation>다음 결과 보기</translation>
     </message>
     <message>
         <source>Show previous result</source>
-        <translation type="unfinished">Show previous result</translation>
+        <translation>이전 결과 보기</translation>
     </message>
     <message>
         <source>Print</source>
@@ -1412,7 +1412,7 @@ Do you want to start the  preferences dialog ?</source>
     </message>
     <message>
         <source>Query details</source>
-        <translation type="vanished">검색어 요청 상세보기</translation>
+        <translation type="vanished">쿼리 상세보기</translation>
     </message>
     <message>
         <source>Could not open external index. Db not open. Check external indexes list.</source>
@@ -1598,7 +1598,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Saved Queries (*.rclq)</source>
-        <translation>저장된 검색어 요청들 (*.rclq)</translation>
+        <translation>저장된 쿼리들 (*.rclq)</translation>
     </message>
     <message>
         <source>Write failed</source>
@@ -1622,7 +1622,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Could not load saved query</source>
-        <translation>저장되었던 요청된 검색어들을 불러올 수 없습니다.</translation>
+        <translation>저장된 쿼리들을 불러올 수 없습니다.</translation>
     </message>
     <message>
         <source>Opening a temporary copy. Edits will be lost if you don&apos;t save&lt;br/&gt;them to a permanent location.</source>
@@ -1670,11 +1670,11 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Unknown indexer state. Can&apos;t access webcache file.</source>
-        <translation>인식할 수 없는 색인 작성기 상태. 웹 캐쉬 파일에 접근할 수 없습니다.</translation>
+        <translation>인식할 수 없는 색인 작성기 상태. 웹 캐시 파일에 접근할 수 없습니다.</translation>
     </message>
     <message>
         <source>Indexer is running. Can&apos;t access webcache file.</source>
-        <translation>색인 작성이 진행되고 있습니다. 웹 캐쉬 파일에 접근할 수 없습니다.</translation>
+        <translation>색인 작성이 진행되고 있습니다. 웹 캐시 파일에 접근할 수 없습니다.</translation>
     </message>
     <message>
         <source> with additional message: </source>
@@ -1694,7 +1694,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Tools</source>
-        <translation>도구들</translation>
+        <translation>도구</translation>
     </message>
     <message>
         <source>Results</source>
@@ -1815,11 +1815,11 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Any term</source>
-        <translation>어느 용어라도</translation>
+        <translation>하나라도 포함</translation>
     </message>
     <message>
         <source>All terms</source>
-        <translation>모든 용어들</translation>
+        <translation>모두 포함</translation>
     </message>
     <message>
         <source>File name</source>
@@ -1827,7 +1827,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Query language</source>
-        <translation>검색어 요청 언어</translation>
+        <translation>쿼리 언어</translation>
     </message>
     <message>
         <source>Stemming language</source>
@@ -1835,7 +1835,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Main Window</source>
-        <translation type="unfinished">Main Window</translation>
+        <translation>메인 화면</translation>
     </message>
     <message>
         <source>Focus to Search</source>
@@ -1855,23 +1855,23 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Clear search</source>
-        <translation type="unfinished">Clear search</translation>
+        <translation>검색 화면 지우기</translation>
     </message>
     <message>
         <source>Move keyboard focus to search entry</source>
-        <translation type="unfinished">Move keyboard focus to search entry</translation>
+        <translation>키보드 포커스를 검색창으로 이동</translation>
     </message>
     <message>
         <source>Move keyboard focus to search, alt.</source>
-        <translation type="unfinished">Move keyboard focus to search, alt.</translation>
+        <translation>키보드 포커스를 검색창으로 이동, 표식 표시 아닐때.</translation>
     </message>
     <message>
         <source>Toggle tabular display</source>
-        <translation type="unfinished">Toggle tabular display</translation>
+        <translation>표식 표시 전환</translation>
     </message>
     <message>
         <source>Move keyboard focus to table</source>
-        <translation type="unfinished">Move keyboard focus to table</translation>
+        <translation>키보드 포커스를 테이블로 이동</translation>
     </message>
 </context>
 <context>
@@ -1894,7 +1894,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation>도구들(&amp;T)</translation>
+        <translation>도구(&amp;T)</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -1926,11 +1926,11 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>&amp;Advanced Search</source>
-        <translation>심화검색(&amp;A)</translation>
+        <translation>고급검색(&amp;A)</translation>
     </message>
     <message>
         <source>Advanced/complex  Search</source>
-        <translation>심화/복합 검색</translation>
+        <translation>고급/복합 검색</translation>
     </message>
     <message>
         <source>&amp;Sort parameters</source>
@@ -2050,7 +2050,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Show Query Details</source>
-        <translation>검색어 요청 상세보기</translation>
+        <translation>쿼리 상세보기</translation>
     </message>
     <message>
         <source>Show results as table</source>
@@ -2126,7 +2126,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Query Fragments</source>
-        <translation>검색어 요청 조각들</translation>
+        <translation>쿼리 프래그먼트</translation>
     </message>
     <message>
         <source>    With failed files retrying</source>
@@ -2178,7 +2178,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Webcache Editor</source>
-        <translation>웹 캐쉬 편집기</translation>
+        <translation>웹 캐시 편집기</translation>
     </message>
     <message>
         <source>Trigger incremental pass</source>
@@ -2198,7 +2198,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>&amp;Query</source>
-        <translation type="unfinished">&amp;Query</translation>
+        <translation>쿼리(&amp;Q)</translation>
     </message>
     <message>
         <source>Increase results text font size</source>
@@ -2206,15 +2206,15 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Increase Font Size</source>
-        <translation type="unfinished">글꼴 키우기</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Decrease results text font size</source>
-        <translation type="unfinished">결과 화면 글꼴 줄이기</translation>
+        <translation>결과 화면 글꼴 줄이기</translation>
     </message>
     <message>
         <source>Decrease Font Size</source>
-        <translation type="unfinished">글꼴 줄이기</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2347,11 +2347,11 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Query details</source>
-        <translation>검색어 요청 상세보기</translation>
+        <translation>쿼리 상세보기</translation>
     </message>
     <message>
         <source>(show query)</source>
-        <translation>(요청된 검색어 보기)</translation>
+        <translation>(쿼리 보기)</translation>
     </message>
     <message>
         <source>Copy &amp;File Name</source>
@@ -2502,7 +2502,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Result Table</source>
-        <translation type="unfinished">Result Table</translation>
+        <translation>결과 테이블</translation>
     </message>
     <message>
         <source>Open</source>
@@ -2522,27 +2522,27 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Open current result document</source>
-        <translation type="unfinished">Open current result document</translation>
+        <translation>현재 결과 문서 열기</translation>
     </message>
     <message>
         <source>Open current result and quit</source>
-        <translation type="unfinished">Open current result and quit</translation>
+        <translation>현재 결과 문서 열고 종료</translation>
     </message>
     <message>
         <source>Show snippets</source>
-        <translation type="unfinished">Show snippets</translation>
+        <translation>부분 발췌 보기</translation>
     </message>
     <message>
         <source>Show header</source>
-        <translation type="unfinished">Show header</translation>
+        <translation>헤더 보이기</translation>
     </message>
     <message>
         <source>Show vertical header</source>
-        <translation type="unfinished">Show vertical header</translation>
+        <translation>수직 헤더 보이기</translation>
     </message>
     <message>
         <source>Copy current result text to clipboard</source>
-        <translation type="unfinished">Copy current result text to clipboard</translation>
+        <translation>현재 결과 텍스트를 클립보드에 복사하기</translation>
     </message>
     <message>
         <source>Use Shift+click to display the text instead.</source>
@@ -2647,11 +2647,11 @@ Please check the desktop file</source>
     <name>SSearch</name>
     <message>
         <source>Any term</source>
-        <translation>어느 용어라도</translation>
+        <translation>하나라도 포함</translation>
     </message>
     <message>
         <source>All terms</source>
-        <translation>모든 용어들</translation>
+        <translation>모두 포함</translation>
     </message>
     <message>
         <source>File name</source>
@@ -2671,7 +2671,7 @@ Please check the desktop file</source>
     </message>
     <message>
         <source>Query language</source>
-        <translation>검색 조건식</translation>
+        <translation>쿼리 언어</translation>
     </message>
     <message>
         <source>Bad query string</source>
@@ -2731,7 +2731,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
 &lt;i&gt;&quot;term1 term2&quot;p&lt;/i&gt; : unordered proximity search with default distance.&lt;br&gt;
 Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual (&amp;lt;F1&gt;) for more detail.
 </source>
-        <translation type="vanished">검색어 요청 언어 표현식을 입력하십시오:&lt;br&gt;
+        <translation type="vanished">쿼리 언어 표현식을 입력하십시오:&lt;br&gt;
 &lt;i&gt;용어1 용어2&lt;/i&gt; : 어느 곳에 있든 &apos;용어1&apos;과 &apos;용어2&apos;.&lt;br&gt;
 &lt;i&gt;필드:용어1&lt;/i&gt; : &apos;용어1&apos;은 &apos;필드&apos;필드에 있음.&lt;br&gt;
  일반적인 필드 이름/동음어들:&lt;br&gt;
@@ -2742,11 +2742,11 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
   이것들을 명확하게 만들기 위해 매개변수를 사용할 수 있습니다.&lt;br&gt;
 &lt;i&gt;&quot;용어1 용어2&quot;&lt;/i&gt; : 어구 (정확히 발생해야 합니다). 가능한 수정자:&lt;br&gt;
 &lt;i&gt;&quot;용어1 용어2&quot;p&lt;/i&gt; : 기본 거리를 사용한 정렬되지 않은 근접 검색&lt;br&gt;
-결과에 대해 의심스럽다면 &lt;b&gt;&quot;검색어 요청 보기&quot;&lt;/b&gt; 링크를 사용하십시오. 더 자세한 내용을 위해 메뉴얼을 참고할 수 있습니다(&amp;lt;F1&gt;).</translation>
+결과에 대해 의심스럽다면 &lt;b&gt;&quot;쿼리 보기&quot;&lt;/b&gt; 링크를 사용하십시오. 더 자세한 내용을 위해 메뉴얼을 참고할 수 있습니다(&amp;lt;F1&gt;).</translation>
     </message>
     <message>
         <source>Stemming languages for stored query: </source>
-        <translation>저장된 검색어 요청에 대한 형태소 언어들</translation>
+        <translation>저장된 쿼리에 대한 형태소 언어들</translation>
     </message>
     <message>
         <source> differ from current preferences (kept)</source>
@@ -2754,19 +2754,19 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Auto suffixes for stored query: </source>
-        <translation>저장된 검색어 요청에 대한 자동 접미사:</translation>
+        <translation>저장된 쿼리에 대한 자동 접미사:</translation>
     </message>
     <message>
         <source>External indexes for stored query: </source>
-        <translation type="vanished">저장된 검색어 요청에 대한 외부 색인:</translation>
+        <translation type="vanished">저장된 쿼리에 대한 외부 색인:</translation>
     </message>
     <message>
         <source>Autophrase is set but it was unset for stored query</source>
-        <translation>자동 어구가 설정되지만, 저장된 검색어 요청에는 설정되지 않습니다.</translation>
+        <translation>자동 어구가 설정되지만, 저장된 쿼리에는 설정되지 않습니다.</translation>
     </message>
     <message>
         <source>Autophrase is unset but it was set for stored query</source>
-        <translation>자동 어구는 설정되지 않습니다만, 저장된 검색어 요청에 대해서는 설정합니다.</translation>
+        <translation>자동 어구는 설정되지 않습니다만, 저장된 쿼리에 대해서는 설정합니다.</translation>
     </message>
     <message>
         <source>Enter search terms here.</source>
@@ -2806,7 +2806,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>&lt;p&gt;Query language cheat-sheet. In doubt: click &lt;b&gt;Show Query&lt;/b&gt;.&amp;nbsp;</source>
-        <translation type="unfinished">&lt;p&gt;Query language cheat-sheet. In doubt: click &lt;b&gt;Show Query&lt;/b&gt;.&amp;nbsp;</translation>
+        <translation type="unfinished">&lt;p&gt;쿼리 언어 힌트. 결과에 대해 의심스럽다면 &lt;b&gt;쿼리 보기&lt;/b&gt;.&amp;nbsp; 링크를 사용하십시오.</translation>
     </message>
     <message>
         <source>You should really look at the manual (F1)&lt;/p&gt;</source>
@@ -3012,7 +3012,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Any</source>
-        <translation>어느 것이라도</translation>
+        <translation>하나라도</translation>
     </message>
     <message>
         <source>All</source>
@@ -3078,7 +3078,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Snippets Window</source>
-        <translation type="unfinished">Snippets Window</translation>
+        <translation>부분 발췌 화면</translation>
     </message>
     <message>
         <source>Find</source>
@@ -3086,7 +3086,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Find (alt)</source>
-        <translation type="unfinished">Find (alt)</translation>
+        <translation>찾기 (alt)</translation>
     </message>
     <message>
         <source>Find Next</source>
@@ -3102,15 +3102,15 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Find next</source>
-        <translation type="unfinished">Find next</translation>
+        <translation>다음 찾기</translation>
     </message>
     <message>
         <source>Find previous</source>
-        <translation type="unfinished">Find previous</translation>
+        <translation>이전 찾기</translation>
     </message>
     <message>
         <source>Close window</source>
-        <translation type="unfinished">Close window</translation>
+        <translation>창 닫기</translation>
     </message>
 </context>
 <context>
@@ -3163,7 +3163,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Else only modified or failed files will be processed.</source>
-        <translation>그렇지 않으면 수정되거나 실패한 파일만 처리됩니다.</translation>
+        <translation>체크하지 않으면 수정되거나 실패한 파일만 처리됩니다.</translation>
     </message>
     <message>
         <source>Erase selected files data before indexing.</source>
@@ -3199,7 +3199,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Retry previously failed files.</source>
-        <translation>이전에 실패한 파일을 재시도하십시오.</translation>
+        <translation>이전에 실패한 파일을 재시도하기.</translation>
     </message>
     <message>
         <source>Start directory. Must be part of the indexed tree. We use  topdirs if empty.</source>
@@ -3211,11 +3211,11 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Diagnostics output file. Will be truncated and receive indexing diagnostics (reasons for files not being indexed).</source>
-        <translation type="unfinished"></translation>
+        <translation>진단결과 파일. 지정한 위치에 진단결과(파일이 인덱싱되지 않은 이유) 파일이 생성됩니다.</translation>
     </message>
     <message>
         <source>Diagnostics file</source>
-        <translation type="unfinished"></translation>
+        <translation>진단결과 파일</translation>
     </message>
 </context>
 <context>
@@ -3452,11 +3452,11 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Any term</source>
-        <translation>어느 용어라도</translation>
+        <translation>하나라도 포함</translation>
     </message>
     <message>
         <source>All terms</source>
-        <translation>모든 용어들</translation>
+        <translation>모두 포함</translation>
     </message>
     <message>
         <source>File name</source>
@@ -3464,7 +3464,7 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Query language</source>
-        <translation>검색어 요청 언어</translation>
+        <translation>쿼리 언어</translation>
     </message>
     <message>
         <source>Value from previous program exit</source>
@@ -3472,23 +3472,23 @@ Use &lt;b&gt;Show Query&lt;/b&gt; link when in doubt about result and see manual
     </message>
     <message>
         <source>Context</source>
-        <translation type="unfinished">Context</translation>
+        <translation>컨텍스트</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation>설명</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished">Shortcut</translation>
+        <translation>단축키</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished">Default</translation>
+        <translation>기본값</translation>
     </message>
     <message>
         <source>Choose QSS File</source>
-        <translation type="unfinished"></translation>
+        <translation>QSS 파일 선택하기</translation>
     </message>
 </context>
 <context>
@@ -3800,7 +3800,7 @@ This should give higher precedence to the results where the search terms appear 
     <name>Webcache</name>
     <message>
         <source>Webcache editor</source>
-        <translation>웹 캐쉬 편집기</translation>
+        <translation>웹 캐시 편집기</translation>
     </message>
     <message>
         <source>Search regexp</source>
@@ -3815,11 +3815,11 @@ This should give higher precedence to the results where the search terms appear 
     </message>
     <message>
         <source>Unknown indexer state. Can&apos;t edit webcache file.</source>
-        <translation>인덱서의 상태를 알 수 없습니다. 웹 캐쉬 파일을 수정할 수 없습니다.</translation>
+        <translation>인덱서의 상태를 알 수 없습니다. 웹 캐시 파일을 수정할 수 없습니다.</translation>
     </message>
     <message>
         <source>Indexer is running. Can&apos;t edit webcache file.</source>
-        <translation>인덱서가 실행중입니다. 웹 캐쉬 파일을 수정할 수 없습니다.</translation>
+        <translation>인덱서가 실행중입니다. 웹 캐시 파일을 수정할 수 없습니다.</translation>
     </message>
     <message>
         <source>Delete selection</source>
@@ -3827,7 +3827,7 @@ This should give higher precedence to the results where the search terms appear 
     </message>
     <message>
         <source>Webcache was modified, you will need to run the indexer after closing this window.</source>
-        <translation>웹 캐쉬가 수정되었으므로 이 창을 닫은 후에 인덱서를 실행해야 합니다.</translation>
+        <translation>웹 캐시가 수정되었으므로 이 창을 닫은 후에 인덱서를 실행해야 합니다.</translation>
     </message>
     <message>
         <source>Save to File</source>
@@ -3943,7 +3943,7 @@ This should give higher precedence to the results where the search terms appear 
     </message>
     <message>
         <source>Recoll - Index Settings: </source>
-        <translation type="vanished">Recoll - 색인 설정: </translation>
+        <translation>Recoll - 색인 설정: </translation>
     </message>
 </context>
 <context>
@@ -4396,7 +4396,7 @@ May be slow for big documents.</source>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>적용(&amp;O)</translation>
     </message>
     <message>
         <source>Discard changes</source>
@@ -4557,7 +4557,7 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Start with simple search mode</source>
-        <translation type="vanished">단순 검색의 검색 기준 기본값:</translation>
+        <translation>단순 검색의 검색 기준 기본값:</translation>
     </message>
     <message>
         <source>Show warning when opening temporary file.</source>
@@ -4629,11 +4629,11 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Misc</source>
-        <translation>잡동사니</translation>
+        <translation>기타</translation>
     </message>
     <message>
-        <source>Work around QTBUG-78923 by inserting space before anchor text</source>
-        <translation>앵커 텍스트 앞에 공백을 삽입하여 QTBUG-78923을 해결합니다.</translation>
+        <source>Work around Tamil QTBUG-78923 by inserting space before anchor text</source>
+        <translation>앵커 텍스트 앞에 공백을 삽입하여 Tamil QTBUG-78923을 해결합니다.</translation>
     </message>
     <message>
         <source>Display a Snippets link even if the document has no pages (needs restart).</source>
@@ -4645,7 +4645,7 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Start with simple search mode: </source>
-        <translation type="unfinished">Start with simple search mode: </translation>
+        <translation>단순 검색의 검색 기준 기본값: </translation>
     </message>
     <message>
         <source>Hide toolbars.</source>
@@ -4669,19 +4669,19 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Shortcuts</source>
-        <translation type="unfinished">Shortcuts</translation>
+        <translation>단축키</translation>
     </message>
     <message>
         <source>Hide result table header.</source>
-        <translation type="unfinished">Hide result table header.</translation>
+        <translation>결과 테이블의 헤더 숨기기.</translation>
     </message>
     <message>
         <source>Show result table row headers.</source>
-        <translation type="unfinished">Show result table row headers.</translation>
+        <translation type="unfinished">결과 테이블의 행 헤더 표시.</translation>
     </message>
     <message>
         <source>Reset shortcuts defaults</source>
-        <translation type="unfinished">Reset shortcuts defaults</translation>
+        <translation>단축키 초기화</translation>
     </message>
     <message>
         <source>Disable the Ctrl+[0-9]/[a-z] shortcuts for jumping to table rows.</source>
@@ -4689,7 +4689,7 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Use F1 to  access the manual</source>
-        <translation type="unfinished">Use F1 to  access the manual</translation>
+        <translation>F1을 사용하여 설명서에 액세스합니다.</translation>
     </message>
     <message>
         <source>Hide some user interface elements.</source>
@@ -4697,79 +4697,79 @@ The default value is 2 (percent). </source>
     </message>
     <message>
         <source>Hide:</source>
-        <translation type="unfinished"></translation>
+        <translation>숨기기:</translation>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>툴바</translation>
     </message>
     <message>
         <source>Status bar</source>
-        <translation type="unfinished"></translation>
+        <translation>상태바</translation>
     </message>
     <message>
         <source>Show button instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴바 대신 버튼이 보여집니다.</translation>
     </message>
     <message>
         <source>Menu bar</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴바</translation>
     </message>
     <message>
         <source>Show choice in menu only.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">메뉴를 통해서만 유형을 선택합니다.</translation>
     </message>
     <message>
         <source>Simple search type</source>
-        <translation type="unfinished">Simple search type</translation>
+        <translation>단순 검색 유형</translation>
     </message>
     <message>
         <source>Clear/Search buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>지우기/검색 버튼</translation>
     </message>
     <message>
         <source>Disable the Ctrl+[0-9]/Shift+[a-z] shortcuts for jumping to table rows.</source>
-        <translation type="unfinished"></translation>
+        <translation>테이블 행으로 이동하는 Ctrl+[0-9]/Shift+[a-z] 단축키 비활성화</translation>
     </message>
     <message>
         <source>None (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>None (default)</translation>
     </message>
     <message>
         <source>Uses the default dark mode style sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>스타일 시트를 기본 다크모드로 설정</translation>
     </message>
     <message>
         <source>Dark mode</source>
-        <translation type="unfinished">Dark mode</translation>
+        <translation>Dark mode</translation>
     </message>
     <message>
         <source>Choose QSS File</source>
-        <translation type="unfinished"></translation>
+        <translation>QSS 파일 선택하기</translation>
     </message>
     <message>
         <source>To display document text instead of metadata in result table detail area, use:</source>
-        <translation type="unfinished"></translation>
+        <translation>결과 테이블에서 메타데이터가 아닌 문서 텍스트를 보려면:</translation>
     </message>
     <message>
         <source>left mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>마우스 클릭</translation>
     </message>
     <message>
         <source>Shift+click</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+클릭</translation>
     </message>
     <message>
         <source>Opens a dialog to select the style sheet file.&lt;br&gt;Look at /usr/share/recoll/examples/recoll[-dark].qss for an example.</source>
-        <translation type="unfinished"></translation>
+        <translation>파일탐색기를 열어 스타일시트 파일을 선택합니다.&lt;br&gt;예시로 /usr/share/recoll/examples/recoll[-dark].qss 를 참고하세요.</translation>
     </message>
     <message>
         <source>Result Table</source>
-        <translation type="unfinished">Result Table</translation>
+        <translation>결과 테이블</translation>
     </message>
     <message>
         <source>Do not display metadata when hovering over rows.</source>
-        <translation type="unfinished"></translation>
+        <translation>마우스가 행 위에 있을 때 메타데이터 표시하지 않기.</translation>
     </message>
 </context>
 </TS>
