@@ -28,6 +28,12 @@ sudo apt install -y recoll=1.31.0-1hamonikr5
 ```
 
 # build
+## Build dependencies
+```
+sudo apt install -y bison debhelper dh-python dpkg-dev libaspell-dev libchm-dev libqt5webkit5-dev libx11-dev libxapian-dev libxslt1-dev libz-dev python3-all-dev python3-setuptools qtbase5-dev python3-pip qttools5-dev-tools docbook-xsl
+
+```
+
 ## How to build from source for othrt linux
 ```
 sudo apt install -y python3-pip
