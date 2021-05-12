@@ -1,3 +1,11 @@
+recoll (1.31.0-1hamonikr6) jin; urgency=medium
+
+  * Apply new Korean translation
+   - Patched to upstream
+   - https://framagit.org/medoc92/recoll/-/merge_requests/5
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 12 May 2021 10:38:48 +0900
+
 recoll (1.31.0-1hamonikr5) jin; urgency=medium
 
   * Add qtgui/mtpics/hwp.png
