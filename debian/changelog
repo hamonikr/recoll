@@ -1,3 +1,9 @@
+recoll (1.31.7-hamonikr1) jammy; urgency=medium
+
+  * Release for ubuntu 22.04
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 04 Oct 2022 13:43:41 +0900
+
 recoll (1.31.0-1hamonikr6) jin; urgency=medium
 
   * Apply new Korean translation
