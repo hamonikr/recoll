@@ -1,3 +1,9 @@
+recoll (1.31.8+hamonikr1) noble; urgency=medium
+
+  * Release for ubuntu 24.04
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 03 Jul 2024 00:37:13 +0900
+
 recoll (1.31.7-hamonikr2) noble; urgency=medium
 
   * Release for ubuntu 24.04
