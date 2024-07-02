@@ -7,7 +7,7 @@ case "$1" in
             chk_module=$(pip3 list | grep pyhwp)
             if [[ -z $chk_module ]]; then
                 echo "Install pyhwp..."
-                pip3 install pyhwp                            
+                pip3 install pyhwp --break-system-packages
             fi
         fi
     ;;
