@@ -16,7 +16,8 @@ Build-Depends: bison,
                python3-all-dev,
                python3-setuptools,
                qtbase5-dev,
-               python3-pip
+               python3-pip,
+               qtchooser,
 Vcs-Git: https://salsa.debian.org/debian/recoll.git
 Vcs-Browser: https://salsa.debian.org/debian/recoll
 Homepage: https://www.lesbonscomptes.com/recoll
