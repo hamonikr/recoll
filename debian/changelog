@@ -1,3 +1,10 @@
+recoll (1.31.8+hamonikr2) paektu; urgency=medium
+
+  [Kevin Kim]
+  * Release for HamoniKR paektu
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 29 Jul 2024 15:18:59 +0900
+
 recoll (1.31.8+hamonikr1) noble; urgency=medium
 
   * Release for ubuntu 24.04
