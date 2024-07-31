@@ -49,7 +49,19 @@ sudo make install
 ```
 
 ## How to build debian package
+
+우분투 24.04 에서는 시스템 전체에 pip 패키지를 설치해야 하는 경우, 
+다음과 같이 PEP 668 정책을 우회하여 설치할 수 있다.  
+
+* pip install 할 때 `--break-system-packages` 플래그를 사용하여 설치
+
+하지만 좋은 방법은 다음과 같이 venv 를 이용해서 가상화 환경을 구성하고 그안에서 작업하는 것
+
 ```
+python3 -m venv build-env
+source build-env/bin/activate
+pip install setuptools
+
 dpkg-buildpackage -T clean
 dpkg-buildpackage
 
